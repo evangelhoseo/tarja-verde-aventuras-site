@@ -89,7 +89,7 @@
   <div onClick="{{closeMenu}}" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);opacity:{{overlayOpacity}};pointer-events:{{overlayPointer}};transition:opacity 0.3s ease;z-index:99"></div>
   <div style="position:fixed;top:0;right:0;height:100vh;height:100dvh;width:340px;max-width:90vw;background:{{theme.panelBg}};color:{{theme.panelText}};transform:{{menuTransform}};transition:transform 0.35s ease;z-index:100;display:flex;flex-direction:column;padding:24px 32px;padding-bottom:max(24px, env(safe-area-inset-bottom));box-shadow:-12px 0 32px rgba(0,0,0,0.25);overflow-y:auto">
     <div style="display:flex;align-items:center;justify-content:space-between">
-      <img data-rg="panel-logo" src="assets/logo-horizontal-color.png" alt="Tarja Verde" style="height:44px" />
+      <a href="Home.dc.html" onClick="{{closeMenu}}"><img data-rg="panel-logo" src="assets/logo-horizontal-color.png" alt="Tarja Verde" style="height:44px" /></a>
       <button onClick="{{closeMenu}}" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:{{theme.panelText}};margin-left:auto">×</button>
     </div>
     <div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;font-weight:700;font-size:1.0625rem;overflow-y:auto">
@@ -106,7 +106,9 @@
 
   <div data-rg="hero-wrap" style="position:relative;min-height:680px;display:flex;align-items:flex-end;overflow:hidden">
     <div style="position:absolute;inset:0">
-      <image-slot id="hero-home" shape="rect" src="media/castelos-hero.jpg" placeholder="hero de marca"></image-slot>
+      <video autoplay muted loop playsinline preload="metadata" poster="media/castelos_hero_poster.jpg" style="width:100%;height:100%;object-fit:cover">
+        <source src="media/castelos_hero_720p.mp4" type="video/mp4">
+      </video>
     </div>
     <div style="position:absolute;inset:0;background:{{theme.heroOverlay}};pointer-events:none"></div>
     <div style="position:relative;padding:0 48px 64px;max-width:700px;color:#fff">
