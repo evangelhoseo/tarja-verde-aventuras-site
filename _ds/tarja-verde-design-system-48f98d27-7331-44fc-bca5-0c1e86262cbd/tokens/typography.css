@@ -1,0 +1,27 @@
+:root{
+--font-brand:'Manrope',system-ui,sans-serif;
+
+--font-weight-light:300;
+--font-weight-regular:400;
+--font-weight-medium:500;
+--font-weight-semibold:600;
+--font-weight-bold:700;
+--font-weight-extrabold:800;
+
+/* Type scale — sized for outdoor/adventure content: big, confident display sizes */
+--text-display:clamp(2.75rem,5vw,4.5rem);
+--text-h1:clamp(2.25rem,3.6vw,3.25rem);
+--text-h2:clamp(1.75rem,2.6vw,2.25rem);
+--text-h3:1.5rem;
+--text-body-lg:1.25rem;
+--text-body:1.0625rem;
+--text-small:0.9375rem;
+--text-caption:0.8125rem;
+--text-eyebrow:0.8125rem; /* used for the rotated sidebar labels e.g. "TARJA · VERDE" */
+
+--leading-tight:1.05;
+--leading-heading:1.15;
+--leading-body:1.5;
+
+--tracking-wide:0.14em; /* eyebrow / vertical sidebar label spacing seen throughout guideline */
+}

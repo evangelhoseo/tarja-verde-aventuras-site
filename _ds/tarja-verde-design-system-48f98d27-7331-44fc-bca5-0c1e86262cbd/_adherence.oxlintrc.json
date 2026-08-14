@@ -1,0 +1,227 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/core/**",
+              "components/navigation/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Manrope))/i]",
+        "message": "Font not provided by the design system. Available: Manrope."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|style|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: children, variant, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:green|orange|brown|outline)$/]",
+        "message": "<Badge> variant must be one of 'green' | 'orange' | 'brown' | 'outline'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|disabled|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, disabled, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|outline|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'outline' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CapsuleFrame'] > JSXAttribute > JSXIdentifier[name!=/^(?:image|children|rotate|width|height|style|key|ref|className|style|children)$/]",
+        "message": "<CapsuleFrame> doesn't accept that prop. Declared props: image, children, rotate, width, height, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|children|image|surface|style|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: title, children, image, surface, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute[name.name='surface'] > Literal[value!=/^(?:light|dark)$/]",
+        "message": "<Card> surface must be one of 'light' | 'dark'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Navbar'] > JSXAttribute > JSXIdentifier[name!=/^(?:logo|links|ctaLabel|onCta|key|ref|className|style|children)$/]",
+        "message": "<Navbar> doesn't accept that prop. Declared props: logo, links, ctaLabel, onCta."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "CapsuleFrame": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "Navbar": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent-contrast",
+      "--accent-primary",
+      "--accent-secondary",
+      "--border-on-dark",
+      "--border-on-light",
+      "--font-brand",
+      "--font-weight-bold",
+      "--font-weight-extrabold",
+      "--font-weight-light",
+      "--font-weight-medium",
+      "--font-weight-regular",
+      "--font-weight-semibold",
+      "--leading-body",
+      "--leading-heading",
+      "--leading-tight",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--shadow-lift",
+      "--shadow-soft",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--surface-black",
+      "--surface-dark",
+      "--surface-darkest",
+      "--surface-light",
+      "--surface-white",
+      "--text-body",
+      "--text-body-lg",
+      "--text-caption",
+      "--text-display",
+      "--text-eyebrow",
+      "--text-h1",
+      "--text-h2",
+      "--text-h3",
+      "--text-muted",
+      "--text-on-dark",
+      "--text-on-light",
+      "--text-small",
+      "--tracking-wide",
+      "--tv-black",
+      "--tv-brown",
+      "--tv-cream",
+      "--tv-green",
+      "--tv-khaki",
+      "--tv-near-black",
+      "--tv-olive",
+      "--tv-orange",
+      "--tv-white"
+    ],
+    "tokenKinds": {
+      "--tv-green": "color",
+      "--tv-orange": "color",
+      "--tv-brown": "color",
+      "--tv-black": "color",
+      "--tv-white": "color",
+      "--tv-near-black": "color",
+      "--tv-cream": "color",
+      "--tv-olive": "color",
+      "--tv-khaki": "color",
+      "--surface-light": "color",
+      "--surface-dark": "color",
+      "--surface-darkest": "color",
+      "--surface-white": "color",
+      "--surface-black": "color",
+      "--text-on-light": "font",
+      "--text-on-dark": "font",
+      "--text-muted": "font",
+      "--accent-primary": "color",
+      "--accent-secondary": "color",
+      "--accent-contrast": "color",
+      "--border-on-light": "color",
+      "--border-on-dark": "color",
+      "--font-brand": "font",
+      "--font-weight-light": "font",
+      "--font-weight-regular": "font",
+      "--font-weight-medium": "font",
+      "--font-weight-semibold": "font",
+      "--font-weight-bold": "font",
+      "--font-weight-extrabold": "font",
+      "--text-display": "font",
+      "--text-h1": "font",
+      "--text-h2": "font",
+      "--text-h3": "font",
+      "--text-body-lg": "font",
+      "--text-body": "font",
+      "--text-small": "font",
+      "--text-caption": "font",
+      "--text-eyebrow": "font",
+      "--leading-tight": "font",
+      "--leading-heading": "font",
+      "--leading-body": "font",
+      "--tracking-wide": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-pill": "radius",
+      "--shadow-soft": "shadow",
+      "--shadow-lift": "shadow"
+    },
+    "fontFamilies": [
+      "Manrope"
+    ]
+  }
+}

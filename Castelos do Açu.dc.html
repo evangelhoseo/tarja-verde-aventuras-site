@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/styles.css">
+  <script src="_ds/tarja-verde-design-system-48f98d27-7331-44fc-bca5-0c1e86262cbd/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0}
+    a{color:var(--tv-green)}
+    a:hover{color:var(--tv-orange)}
+    @keyframes heroTextIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+    [data-rg="hero"]{animation:heroTextIn 0.9s cubic-bezier(.2,.8,.2,1) 0.4s both}
+    @media (prefers-reduced-motion: reduce){[data-rg="hero"]{animation:none}}
+    @keyframes auroraShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @media (max-width: 900px) {
+      [data-rg="2"] { grid-template-columns: 1fr !important; }
+      [data-rg="footer"] { grid-template-columns: 1fr !important; gap:32px !important; }
+      [data-rg="panel"] { width: 86vw !important; }
+      [data-rg="header"] { padding: 16px 20px !important; }
+      [data-rg="section"] { padding: 56px 24px !important; }
+      [data-rg="hero"] { padding: 0 24px 40px !important; }
+      [data-rg="brand"] { gap: 8px !important; }
+    }
+    @media (max-width: 640px) {
+      [data-rg="autofit"] { grid-template-columns: 1fr !important; }
+      [data-rg="brand"] img { height: 48px !important; }
+      [data-rg="brand"] span { font-size: 0.75rem !important; }
+      [data-rg="header-actions"] { top: 16px !important; right: 16px !important; gap: 10px !important; }
+    }
+
+    @media (max-width: 420px) {
+      [data-rg="brand"] img { height: 38px !important; }
+      [data-rg="brand"] span { font-size: 0.6875rem !important; letter-spacing: 0.08em !important; }
+    }
+    html, body { overflow-x: hidden; max-width: 100vw; }
+  </style>
+</helmet>
+
+<div ref="{{setRootRef}}" data-screen-label="Castelos do Açu" style="font-family:var(--font-brand);background:{{theme.pageBg}};background-size:{{theme.pageBgSize}};animation:{{theme.pageBgAnim}};transition:background 0.5s ease;min-height:100vh">
+
+  <div data-rg="header" style="background:{{headerBg}};padding:24px 48px;position:fixed;top:0;left:0;right:0;z-index:60;transform:{{headerTransform}};transition:transform 0.3s ease, background 0.3s ease">
+    <a href="Home.dc.html" data-rg="brand" style="display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none">
+      <img src="assets/logo-horizontal-dark.png" alt="Tarja Verde" style="height:56px" />
+      <span style="font-family:var(--font-brand);color:#fff;font-size:1rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;opacity:0.85">Aventuras</span>
+    </a>
+    <div data-rg="header-actions" style="position:absolute;top:24px;right:48px;display:flex;align-items:center;gap:14px">
+      <button onClick="{{toggleMenu}}" style="width:44px;height:44px;background:var(--tv-orange);border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+        <span style="width:20px;height:2px;background:#fff;display:block"></span>
+        <span style="width:20px;height:2px;background:#fff;display:block"></span>
+        <span style="width:20px;height:2px;background:#fff;display:block"></span>
+      </button>
+    </div>
+  </div>
+
+  <div onClick="{{closeMenu}}" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);opacity:{{overlayOpacity}};pointer-events:{{overlayPointer}};transition:opacity 0.3s ease;z-index:99"></div>
+  <div data-rg="panel" style="position:fixed;top:0;right:0;height:100vh;height:100dvh;width:340px;max-width:90vw;background:{{theme.panelBg}};color:{{theme.panelText}};transform:{{menuTransform}};transition:transform 0.35s ease;z-index:100;display:flex;flex-direction:column;padding:24px 32px;padding-bottom:max(24px, env(safe-area-inset-bottom));box-shadow:-12px 0 32px rgba(0,0,0,0.25);overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <img data-rg="panel-logo" src="assets/logo-horizontal-color.png" alt="Tarja Verde" style="height:44px" />
+      <button onClick="{{closeMenu}}" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:{{theme.panelText}};margin-left:auto">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;font-weight:700;font-size:1.0625rem;overflow-y:auto">
+      <a href="#seguranca" onClick="{{closeMenu}}" style="color:{{theme.panelText}};text-decoration:none">Sobre o Zeca</a>
+      <a href="#agenda" onClick="{{closeMenu}}" style="color:{{theme.panelText}};text-decoration:none">Grupo do WhatsApp</a>
+      <a href="Home.dc.html" style="color:{{theme.panelText}};text-decoration:none">Home</a>
+      <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55;margin-top:8px">Roteiros</div>
+      <a href="Castelos do Açu.dc.html" style="color:{{theme.panelText}};text-decoration:none;opacity:0.9">Castelos do Açu</a>
+      <a href="Circuito 3D.dc.html" style="color:{{theme.panelText}};text-decoration:none;opacity:0.9">Circuito 3D</a>
+      <a href="Tapera + Zé Mundrongo.dc.html" style="color:{{theme.panelText}};text-decoration:none;opacity:0.9">Tapera + Zé Mundrongo</a>
+      <a href="Aurora Boreal.dc.html" style="color:{{theme.panelText}};text-decoration:none;opacity:0.9">Aurora Boreal</a>
+    </div>
+<x-import component-from-global-scope="DesignSystem_48f98d.Button" variant="secondary" dc-props="{{ panelWaBtnProps }}" style="flex-shrink:0" hint-size="auto,52px">Fale no WhatsApp</x-import>
+  </div>
+
+  <div data-rg="hero-wrap" style="position:relative;min-height:680px;display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <video autoplay muted loop playsinline preload="metadata" poster="media/castelos_hero_poster.jpg" style="width:100%;height:100%;object-fit:cover">
+        <source src="media/castelos_hero_720p.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div style="position:absolute;inset:0;background:{{theme.heroOverlay}};pointer-events:none"></div>
+    <div data-rg="hero" style="position:relative;padding:0 48px 64px;max-width:760px;color:#fff">
+      <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="orange" hint-size="auto,30px">Trilha · Região Serrana do RJ</x-import>
+      <div style="font-size:var(--text-display);font-weight:800;line-height:var(--leading-tight);margin-top:20px">Trilha Castelos do Açu</div>
+      <p style="font-size:var(--text-body-lg);margin-top:20px;line-height:var(--leading-body);opacity:0.92;max-width:600px">Subida até os costões rochosos que dão nome à trilha, com mar de nuvens e vista aberta pra Região Serrana. Sua dose de natureza, com o Tio Zeca.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+        <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="outline" dc-props="{{ heroBadgeProps }}" hint-size="auto,30px">~10km ida e volta</x-import>
+        <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="outline" dc-props="{{ heroBadgeProps }}" hint-size="auto,30px">6–7h</x-import>
+        <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="outline" dc-props="{{ heroBadgeProps }}" hint-size="auto,30px">Dificuldade moderada</x-import>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:32px">
+        <x-import component-from-global-scope="DesignSystem_48f98d.Button" size="lg" hint-size="auto,56px">Ver datas disponíveis</x-import>
+        <x-import component-from-global-scope="DesignSystem_48f98d.Button" size="lg" variant="ghost" dc-props="{{ ghostBtnProps }}" hint-size="auto,56px">Falar no WhatsApp</x-import>
+      </div>
+    </div>
+  </div>
+
+  <section id="seguranca" data-reveal data-rg="section" style="padding:96px 48px;background:{{theme.sectionAltBg}}">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;color:var(--tv-green)"><span style="font-size:var(--text-eyebrow);font-weight:800;letter-spacing:var(--tracking-wide);text-transform:uppercase;white-space:nowrap">Segurança em primeiro lugar</span><span style="flex:1;height:1px;background:currentColor;opacity:0.35"></span></div>
+      <div style="font-size:var(--text-h2);font-weight:800;color:{{theme.headingText}};margin-top:12px;max-width:640px">Guia certificado, experiência de campo e equipamento adequado</div>
+      <div data-rg="autofit" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:28px;margin-top:48px">
+
+        <div style="background:{{theme.cardBg}};color:{{theme.cardText}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);padding:32px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--tv-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <div style="font-weight:800;font-size:1.125rem;margin-top:16px">Guia certificado</div>
+          <p style="font-size:0.9375rem;line-height:1.5;margin-top:8px;opacity:0.85">Guia local com credencial CADASTUR e curso de primeiros socorros em ambiente selvagem (WFA).</p>
+        </div>
+
+        <div style="background:{{theme.cardBg}};color:{{theme.cardText}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);padding:32px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--tv-orange)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 20V10a2 2 0 0 1 2-2h2V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M9 4v4"></path><path d="M15 4v4"></path><path d="M9 14h6"></path></svg>
+          <div style="font-weight:800;font-size:1.125rem;margin-top:16px">Experiência em campo</div>
+          <p style="font-size:0.9375rem;line-height:1.5;margin-top:8px;opacity:0.85">Mais de 8 anos de trilha na Região Serrana, com dezenas de saídas conduzidas pelo Tio Zeca.</p>
+        </div>
+
+        <div style="background:{{theme.cardBg}};color:{{theme.cardText}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);padding:32px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--tv-brown)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          <div style="font-weight:800;font-size:1.125rem;margin-top:16px">Equipamento de segurança</div>
+          <p style="font-size:0.9375rem;line-height:1.5;margin-top:8px;opacity:0.85">Kit de primeiros socorros, rádio comunicador e corda de apoio nos trechos mais técnicos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="agenda" data-reveal data-rg="section" style="padding:96px 48px;background:{{theme.sectionAltBg2}}">
+    <div data-rg="2" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;color:var(--tv-green)"><span style="font-size:var(--text-eyebrow);font-weight:800;letter-spacing:var(--tracking-wide);text-transform:uppercase;white-space:nowrap">Próximas saídas</span><span style="flex:1;height:1px;background:currentColor;opacity:0.35"></span></div>
+        <div style="font-size:var(--text-h2);font-weight:800;color:{{theme.headingText}};margin-top:12px">Agenda — Castelos do Açu</div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:36px">
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+            <div style="display:flex;align-items:center;gap:14px">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--tv-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg>
+              <span style="font-weight:700">Domingo · 16/08</span>
+            </div>
+            <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="outline" hint-size="auto,26px">Vagas abertas</x-import>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+            <div style="display:flex;align-items:center;gap:14px">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--tv-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg>
+              <span style="font-weight:700">Domingo · 30/08</span>
+            </div>
+            <x-import component-from-global-scope="DesignSystem_48f98d.Badge" variant="outline" hint-size="auto,26px">Vagas abertas</x-import>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="background:{{theme.cardBg}};color:{{theme.cardText}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);padding:40px;text-align:center">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--tv-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style="margin:0 auto"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        <div style="font-weight:800;font-size:1.125rem;margin-top:16px">Entre no grupo do WhatsApp</div>
+        <p style="font-size:0.9375rem;line-height:1.5;margin-top:8px;opacity:0.85">Avisos de vaga, ponto de encontro e mudanças de data em cima da hora.</p>
+        <div style="margin-top:20px;display:flex;justify-content:center">
+          <x-import component-from-global-scope="DesignSystem_48f98d.Button" variant="secondary" hint-size="auto,48px">Entrar no grupo</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roteiro" data-reveal data-rg="section" style="padding:96px 48px;background:{{theme.sectionAltBg}}">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;color:var(--tv-green)"><span style="font-size:var(--text-eyebrow);font-weight:800;letter-spacing:var(--tracking-wide);text-transform:uppercase;white-space:nowrap">Ficha técnica</span><span style="flex:1;height:1px;background:currentColor;opacity:0.35"></span></div>
+      <div style="font-size:var(--text-h2);font-weight:800;color:{{theme.headingText}};margin-top:12px">Detalhe do roteiro</div>
+
+      <div data-rg="autofit" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:20px;margin-top:44px">
+        <div style="padding:20px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+          <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;opacity:0.6">Distância</div>
+          <div style="font-size:1.375rem;font-weight:800;margin-top:6px">~10 km <span style="font-weight:500;font-size:0.9375rem;opacity:0.8">ida e volta</span></div>
+        </div>
+        <div style="padding:20px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+          <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;opacity:0.6">Duração</div>
+          <div style="font-size:1.375rem;font-weight:800;margin-top:6px">6–7 horas</div>
+        </div>
+        <div style="padding:20px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+          <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;opacity:0.6">Dificuldade</div>
+          <div style="font-size:1.375rem;font-weight:800;margin-top:6px">Moderada</div>
+        </div>
+        <div style="padding:20px;background:{{theme.cardBg}};border:1px solid {{theme.hairline}};border-radius:var(--radius-md);color:{{theme.cardText}}">
+          <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;opacity:0.6">Investimento</div>
+          <div style="font-size:1.375rem;font-weight:800;margin-top:6px">R$150–200 <span style="font-weight:500;font-size:0.9375rem;opacity:0.8">/pessoa</span></div>
+        </div>
+      </div>
+
+      <div data-rg="2" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px">
+        <div>
+          <div style="font-weight:800;font-size:1.125rem;color:{{theme.headingText}}">Itinerário</div>
+          <ul style="margin-top:16px;padding-left:20px;color:{{theme.bodyText}};font-size:0.9375rem;line-height:1.7">
+            <li>Saída da base da trilha, na entrada da estrada de acesso aos Castelos do Açu</li>
+            <li>Subida até os costões rochosos — mirante dos "Castelos"</li>
+            <li>Parada no mirante principal, com vista para o mar de nuvens</li>
+            <li>Retorno pelo mesmo trajeto</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:800;font-size:1.125rem;color:{{theme.headingText}}">O que está incluso</div>
+          <ul style="margin-top:16px;padding-left:20px;color:{{theme.bodyText}};font-size:0.9375rem;line-height:1.7">
+            <li>Guia credenciado</li>
+            <li>Seguro de vida temporário para atividade de trilha</li>
+            <li>Transporte compartilhado até o ponto de encontro (saída de van)</li>
+            <li>Lanche leve e água mineral</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:44px">
+        <x-import component-from-global-scope="DesignSystem_48f98d.Button" size="lg" hint-size="auto,56px">Reservar vaga</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" data-reveal data-rg="section" style="padding:96px 48px;background:{{theme.sectionAltBg2}}">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;color:var(--tv-green)"><span style="font-size:var(--text-eyebrow);font-weight:800;letter-spacing:var(--tracking-wide);text-transform:uppercase;white-space:nowrap">Registro real de trilha</span><span style="flex:1;height:1px;background:currentColor;opacity:0.35"></span></div>
+      <div style="font-size:var(--text-h2);font-weight:800;color:{{theme.headingText}};margin-top:12px">Direto da trilha, sem banco de imagens</div>
+
+      <div style="position:relative;margin-top:48px">
+        <button onClick="{{scrollGalleryLeft}}" style="position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:999px;border:none;background:var(--tv-orange);color:#fff;cursor:pointer;font-size:1.125rem;z-index:2">‹</button>
+        <div ref="{{setGalleryRef}}" onClick="{{openLightboxFromEvent}}" onPointerUp="{{openLightboxFromEvent}}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 56px;scrollbar-width:none">
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-1.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-1" shape="rect" src="media/castelos-gal-1.jpg" placeholder="formação rochosa"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Formação rochosa dos Castelos do Açu</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-2.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-2" shape="rect" src="media/castelos-gal-2.jpg" placeholder="placa de trilha real"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Placa de trilha na Portaria do Açu</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-3.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-3" shape="rect" src="media/castelos-gal-3.jpg" placeholder="pôr do sol"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Pôr do sol entre as rochas</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-4.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-4" shape="rect" src="media/castelos-gal-4.jpg" placeholder="cânion"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Trecho de cânion na subida</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-5.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-5" shape="rect" src="media/castelos-gal-5.jpg" placeholder="cachoeira"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Cachoeira no percurso</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-6.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-6" shape="rect" src="media/castelos-gal-6.jpg" placeholder="trilha"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Início da subida</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-7.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-7" shape="rect" src="media/castelos-gal-7.jpg" placeholder="trilha"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Trecho de mata fechada</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-8.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-8" shape="rect" src="media/castelos-gal-8.jpg" placeholder="trilha"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Grupo em movimento na trilha</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-9.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-9" shape="rect" src="media/castelos-gal-9.jpg" placeholder="placa de trilha"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Sinalização no caminho</div>
+          </div>
+          <div style="width:280px;flex-shrink:0;scroll-snap-align:center;background:{{theme.cardBg}};color:{{theme.cardText}};border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft)">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+              <img src="assets/logo-horizontal-color.png" alt="" style="width:28px;height:28px;border-radius:999px;object-fit:cover;background:var(--tv-green)" />
+              <span style="font-weight:700;font-size:0.875rem">tarjaverdeaventuras</span>
+            </div>
+            <div data-lightbox-src="media/castelos-gal-10.jpg" style="aspect-ratio:1/1;cursor:pointer"><image-slot id="gal-castelos-10" shape="rect" src="media/castelos-gal-10.jpg" placeholder="vista do topo"></image-slot></div>
+            <div style="padding:12px 14px;font-size:0.8125rem;opacity:0.8">Vista do topo dos Castelos</div>
+          </div>
+        </div>
+        <button onClick="{{scrollGalleryRight}}" style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:999px;border:none;background:var(--tv-orange);color:#fff;cursor:pointer;font-size:1.125rem;z-index:2">›</button>
+      </div>
+      <div style="text-align:center;margin-top:32px;color:{{theme.bodyMuted}};font-size:0.875rem">Fotos: acervo do Tio Zeca — @tarjaverdeaventuras</div>
+    </div>
+  </section>
+
+  <div onClick="{{closeLightbox}}" style="position:fixed;inset:0;background:rgba(0,0,0,0.9);display:{{lightboxDisplay}};align-items:center;justify-content:center;z-index:200;padding:40px">
+    <img src="{{lightboxSrc}}" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px" />
+    <button onClick="{{closeLightbox}}" style="position:absolute;top:24px;right:32px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1">×</button>
+  </div>
+
+  <footer style="background:{{theme.footerBg}};color:{{theme.footerText}};padding:64px 48px 32px;transition:background 0.4s ease">
+    <div data-rg="footer" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px">
+      <div>
+        <img src="{{theme.footerLogo}}" alt="Tarja Verde" style="height:40px" />
+        <p style="margin-top:16px;font-size:0.9375rem;line-height:1.6;opacity:0.85">Levar gente pra trilha com segurança, na Região Serrana do Rio.</p>
+        <p style="margin-top:16px;font-size:0.9375rem;opacity:0.85">contato@tarjaverdeaventuras.com.br<br>@tarjaverdeaventuras</p>
+      </div>
+      <div>
+        <div style="font-weight:800;font-size:1.0625rem;margin-bottom:12px">Credenciais</div>
+        <p style="font-size:0.9375rem;line-height:1.6;opacity:0.85">Guia com credencial CADASTUR e curso de primeiros socorros em ambiente selvagem (WFA).</p>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <span style="padding:6px 14px;border-radius:999px;border:1.5px solid currentColor;opacity:0.75;font-size:0.6875rem;font-weight:800;letter-spacing:0.03em;white-space:nowrap">CADASTUR</span>
+          <span style="padding:6px 14px;border-radius:999px;border:1.5px solid currentColor;opacity:0.75;font-size:0.6875rem;font-weight:800;letter-spacing:0.03em;white-space:nowrap">WFA</span>
+          <span style="padding:6px 14px;border-radius:999px;border:1.5px solid currentColor;opacity:0.75;font-size:0.6875rem;font-weight:800;letter-spacing:0.03em;white-space:nowrap">SEGURO</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:800;font-size:1.0625rem;margin-bottom:12px">Roteiros</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:0.9375rem">
+          <a href="Castelos do Açu.dc.html" style="color:inherit;opacity:0.85">Castelos do Açu</a>
+          <a href="Circuito 3D.dc.html" style="color:inherit;opacity:0.85">Circuito 3D</a>
+          <a href="Tapera + Zé Mundrongo.dc.html" style="color:inherit;opacity:0.85">Tapera + Zé Mundrongo</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);font-size:0.8125rem;opacity:0.6">@tarjaverdeaventuras · Obrigado</div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { boreal: false, menuOpen: false, headerHidden: false, lightboxSrc: null, atTop: true };
+
+  openLightboxFromEvent = (e) => {
+    const el = e.target.closest('[data-lightbox-src]');
+    if (el) this.setState({ lightboxSrc: el.getAttribute('data-lightbox-src') });
+  };
+  closeLightbox = () => this.setState({ lightboxSrc: null });
+
+  componentWillUnmount() {
+    if (this.rafId) cancelAnimationFrame(this.rafId);
+  }
+
+  setRootRef = (el) => { this.rootEl = el; };
+  setGalleryRef = (el) => { this.galleryEl = el; };
+  scrollGallery = (dir) => { if (this.galleryEl) this.galleryEl.scrollBy({ left: dir * 320, behavior: 'smooth' }); };
+
+  componentDidMount() {
+    this.lastScrollY = window.scrollY;
+    this.pollScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const hidden = y > this.lastScrollY && y > 80;
+      const atTop = y < 10;
+      if (hidden !== this.state.headerHidden || atTop !== this.state.atTop) this.setState({ headerHidden: hidden, atTop });
+      this.lastScrollY = y;
+      this.rafId = requestAnimationFrame(this.pollScroll);
+    };
+    this.rafId = requestAnimationFrame(this.pollScroll);
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!this.rootEl) return;
+    const els = this.rootEl.querySelectorAll('[data-reveal]');
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  }
+
+  renderVals() {
+    const boreal = this.state.boreal;
+    const light = {
+      pageBg: 'var(--tv-cream)', pageBgSize: 'auto', pageBgAnim: 'none',
+      navBg: 'var(--tv-cream)', navText: 'var(--tv-brown)', headingText: 'var(--tv-brown)',
+      bodyText: 'var(--tv-brown)', bodyMuted: 'var(--text-muted)',
+      cardBg: '#ffffff', cardText: 'var(--tv-brown)',
+      sectionAltBg: '#ffffff', sectionAltBg2: 'var(--tv-cream)',
+      footerBg: 'var(--tv-brown)', footerText: '#ffffff',
+      hairline: 'rgba(85,50,20,0.15)',
+      logo: 'assets/logo-horizontal-color.png', footerLogo: 'assets/logo-horizontal-dark.png',
+      toggleTrackBg: 'rgba(85,50,20,0.2)', toggleKnobBg: 'var(--tv-brown)', toggleJustify: 'flex-start',
+      heroOverlay: 'linear-gradient(180deg, rgba(40,26,14,0.15) 0%, rgba(40,26,14,0.8) 100%)',
+      panelBg: '#ffffff', panelText: 'var(--tv-brown)',
+    };
+    const dark = {
+      pageBg: 'linear-gradient(120deg, #14100b 0%, #16332a 25%, #281a3f 50%, #12283a 75%, #14100b 100%)',
+      pageBgSize: '400% 400%', pageBgAnim: 'auroraShift 22s ease infinite',
+      navBg: 'rgba(20,16,11,0.7)', navText: '#ffffff', headingText: '#ffffff',
+      bodyText: 'rgba(255,255,255,0.88)', bodyMuted: 'rgba(255,255,255,0.6)',
+      cardBg: 'rgba(255,255,255,0.07)', cardText: '#ffffff',
+      sectionAltBg: 'transparent', sectionAltBg2: 'rgba(255,255,255,0.04)',
+      footerBg: 'rgba(20,16,11,0.85)', footerText: '#ffffff',
+      hairline: 'rgba(255,255,255,0.16)',
+      logo: 'assets/logo-horizontal-dark.png', footerLogo: 'assets/logo-horizontal-dark.png',
+      toggleTrackBg: 'var(--tv-green)', toggleKnobBg: '#ffffff', toggleJustify: 'flex-end',
+      heroOverlay: 'linear-gradient(180deg, rgba(20,16,11,0.25) 0%, rgba(20,16,11,0.88) 100%)',
+      panelBg: 'rgba(20,16,11,0.98)', panelText: '#ffffff',
+    };
+    const menuOpen = this.state.menuOpen;
+    return {
+      theme: boreal ? dark : light,
+      toggleBoreal: () => this.setState(s => ({ boreal: !s.boreal })),
+      capsuleSize: { width: 190, height: 300 },
+      ghostBtnProps: { style: { color: '#fff', border: '2px solid #fff', background: 'rgba(0,0,0,0.35)' } },
+      panelWaBtnProps: { style: { width: '100%', boxSizing: 'border-box', marginTop: '64px', marginBottom: '24px' } },
+      headerTransform: this.state.headerHidden ? 'translateY(-100%)' : 'translateY(0)',
+      headerBg: this.state.atTop ? 'transparent' : 'var(--tv-near-black)',
+      heroBadgeProps: { style: { borderColor: '#fff', color: '#fff', background: 'rgba(0,0,0,0.35)' } },
+      openLightboxFromEvent: this.openLightboxFromEvent,
+      closeLightbox: this.closeLightbox,
+      lightboxSrc: this.state.lightboxSrc || 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+      lightboxDisplay: this.state.lightboxSrc ? 'flex' : 'none',
+      menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuTransform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
+      overlayOpacity: menuOpen ? 1 : 0,
+      overlayPointer: menuOpen ? 'auto' : 'none',
+      setRootRef: this.setRootRef,
+      setGalleryRef: this.setGalleryRef,
+      scrollGalleryLeft: () => this.scrollGallery(-1),
+      scrollGalleryRight: () => this.scrollGallery(1),
+    };
+  }
+}
+</script>
+</body>
+</html>

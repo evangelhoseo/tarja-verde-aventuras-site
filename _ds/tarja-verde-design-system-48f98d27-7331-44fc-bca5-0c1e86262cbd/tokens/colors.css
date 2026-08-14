@@ -1,0 +1,32 @@
+:root{
+/* Brand core — exact RGB values fixed in the guideline (page 7) */
+--tv-green:#82B40A;
+--tv-orange:#FF8200;
+--tv-brown:#553214;
+
+/* Neutrals sampled from guideline panels */
+--tv-black:#000000;
+--tv-white:#FFFFFF;
+--tv-near-black:#281A0E;   /* "Fundo Escuro — Opção" dark brown-black panel */
+--tv-cream:#D7D7D2;         /* "Fundo Claro" panel / cream backdrop used across templates */
+--tv-olive:#495342;         /* dry-fit merch fabric */
+--tv-khaki:#B4AE9E;         /* light-colorway merch fabric */
+
+/* Semantic aliases */
+--surface-light:var(--tv-cream);
+--surface-dark:var(--tv-brown);
+--surface-darkest:var(--tv-near-black);
+--surface-white:var(--tv-white);
+--surface-black:var(--tv-black);
+
+--text-on-light:var(--tv-brown);
+--text-on-dark:var(--tv-white);
+--text-muted:#8A8578;
+
+--accent-primary:var(--tv-green);
+--accent-secondary:var(--tv-orange);
+--accent-contrast:var(--tv-brown);
+
+--border-on-light:var(--tv-brown);
+--border-on-dark:var(--tv-white);
+}

@@ -1,0 +1,4 @@
+/* Manrope — brand typeface (guideline specifies Google Fonts, no proprietary font file provided).
+   Loaded from Google Fonts; sandbox restrictions here prevent self-hosting the binaries,
+   so this @import is the shipped mechanism. Weights match the guideline's suggested ladder. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
