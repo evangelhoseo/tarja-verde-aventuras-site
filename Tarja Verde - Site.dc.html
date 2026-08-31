@@ -292,6 +292,8 @@ class Component extends DCLogic {
         v.playsInline = true;
         if (v.paused) v.play().catch(() => {});
       });
+      const heroVideo = document.querySelector('#topo video');
+      if (heroVideo && heroVideo.playbackRate !== 0.5) heroVideo.playbackRate = 0.5;
     };
     document.addEventListener('visibilitychange', this._keepVideosPlaying);
     this._keepVideosPlaying();
