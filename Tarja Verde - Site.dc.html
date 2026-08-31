@@ -299,7 +299,7 @@ class Component extends DCLogic {
         if (v.paused) v.play().catch(() => {});
       });
       const heroVideo = document.querySelector('#topo video');
-      if (heroVideo && heroVideo.playbackRate !== 0.5) heroVideo.playbackRate = 0.5;
+      if (heroVideo && heroVideo.playbackRate !== 0.75) heroVideo.playbackRate = 0.75;
     };
     document.addEventListener('visibilitychange', this._keepVideosPlaying);
     this._keepVideosPlaying();
