@@ -390,7 +390,9 @@ class Component extends DCLogic {
         : { height: '3.5rem', width: 'auto', filter: 'drop-shadow(0 3px 14px rgba(0,0,0,0.65))', transition: 'all 0.5s' },
       navLinkStyle: scrolled ? { color: 'oklch(0.354 0.067 58.6 / 0.7)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem' } : { color: 'rgba(255,255,255,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem' },
       heroRef: this.revealRef('hero'),
-      heroReveal: this.revealStyle('hero'),
+      heroReveal: isMobile
+        ? { ...this.revealStyle('hero'), display: 'flex', flexDirection: 'column', height: '100%' }
+        : this.revealStyle('hero'),
       manifestoRef: this.revealRef('manifesto'),
       manifestoReveal: this.revealStyle('manifesto'),
       guiaImgRef: this.revealRef('guia-img'),
@@ -403,13 +405,13 @@ class Component extends DCLogic {
       stats,
       seguranca,
       heroCtaRowStyle: isMobile
-        ? { marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }
+        ? { marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '24px', flex: 1 }
         : { marginTop: '40px', display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px' },
       heroParagraphStyle: isMobile
         ? { fontWeight: 200, letterSpacing: '-0.01em', fontSize: '1.05rem', color: 'rgba(255,255,255,0.85)', margin: 0 }
         : { fontWeight: 200, letterSpacing: '-0.01em', maxWidth: '28rem', fontSize: '1.1rem', color: 'rgba(255,255,255,0.85)', margin: 0 },
       heroButtonsRowStyle: isMobile
-        ? { display: 'flex', flexDirection: 'column', gap: '12px' }
+        ? { display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'auto', paddingBottom: '8px' }
         : { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', flexShrink: 0 },
       heroBtnPrimaryStyle: { borderRadius: '9999px', background: 'oklch(0.708 0.181 127.1)', padding: '16px 28px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem', transition: 'background-color 0.2s', whiteSpace: 'nowrap', textAlign: 'center' },
       heroBtnSecondaryStyle: { borderRadius: '9999px', border: '2px solid rgba(255,255,255,0.6)', padding: '16px 28px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem', transition: 'all 0.2s', whiteSpace: 'nowrap', textAlign: 'center' },
