@@ -39,12 +39,15 @@
     ::selection { background: oklch(0.708 0.181 127.1); color: #fff; }
     a { color: inherit; text-decoration: none; }
     a:hover { color: inherit; }
+    .tv-nav-roteiros { position: relative; display: flex; align-items: center; }
+    .tv-nav-dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; margin-top: 8px; }
+    .tv-nav-roteiros:hover .tv-nav-dropdown, .tv-nav-roteiros:focus-within .tv-nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   </style>
 </helmet>
 
 <div style="min-height:100vh; overflow-x:hidden; background:oklch(0.96 0.009 100); color:oklch(0.354 0.067 58.6);">
 
-  <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" style="position:fixed; right:20px; bottom:20px; z-index:40; display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:9999px; background:oklch(0.708 0.181 127.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); transition:transform 0.2s;" style-hover="transform:scale(1.06);">
+  <a href="https://wa.me/5521984885282" target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" style="position:fixed; right:20px; bottom:20px; z-index:40; display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:9999px; background:oklch(0.708 0.181 127.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); transition:transform 0.2s;" style-hover="transform:scale(1.06);">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.14 8.14 0 0 1-1.26-4.35c0-4.51 3.68-8.19 8.2-8.19 2.19 0 4.25.86 5.8 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.51-3.68 8.2-8.15 8.2Zm4.47-6.14c-.24-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.78.95-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.29.37-.43.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z"/></svg>
   </a>
 
@@ -58,10 +61,18 @@
           <img src="{{ logoSrc }}" alt="Tarja Verde Aventuras" style="{{ logoStyle }}" />
         </a>
         <nav style="{{ desktopNavStyle }}">
-          <a href="../" style="{{ navLinkStyle }}">Roteiros</a>
-          <a href="../../index.html#guia" style="{{ navLinkStyle }}">Zeca Blak</a>
+          <div class="tv-nav-roteiros">
+            <a href="../" style="{{ navLinkStyle }}">Roteiros</a>
+            <div class="tv-nav-dropdown" style="border-radius:16px; background:oklch(0.96 0.009 100); box-shadow:0 12px 32px rgba(0,0,0,0.18); padding:8px; display:flex; flex-direction:column; min-width:200px;">
+              <a href="../#niteroi" style="display:block; padding:10px 14px; border-radius:10px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:0.68rem; white-space:nowrap;" style-hover="background:oklch(0.895 0.011 112.4);">Niterói</a>
+              <a href="../#regiao-serrana" style="display:block; padding:10px 14px; border-radius:10px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:0.68rem; white-space:nowrap;" style-hover="background:oklch(0.895 0.011 112.4);">Região Serrana</a>
+              <a href="../#cidade-do-rio" style="display:block; padding:10px 14px; border-radius:10px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:0.68rem; white-space:nowrap;" style-hover="background:oklch(0.895 0.011 112.4);">Cidade do Rio</a>
+              <a href="../#fora-do-estado" style="display:block; padding:10px 14px; border-radius:10px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:0.68rem; white-space:nowrap;" style-hover="background:oklch(0.895 0.011 112.4);">Fora do Estado</a>
+              <a href="../#internacional" style="display:block; padding:10px 14px; border-radius:10px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:0.68rem; white-space:nowrap;" style-hover="background:oklch(0.895 0.011 112.4);">Internacional</a>
+            </div>
+          </div>
           <a href="../../index.html#agenda" style="{{ navLinkStyle }}">Grupo</a>
-          <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:12px 20px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Bora?</a>
+          <a href="https://wa.me/5521984885282" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:12px 20px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Bora?</a>
         </nav>
         <button aria-label="Abrir menu" onClick="{{ toggleMenu }}" style="{{ hamburgerBtnStyle }}">
           <span style="{{ barStyle1 }}"></span>
@@ -73,10 +84,18 @@
   </header>
 
   <div style="{{ menuOverlayStyle }}">
-    <a href="../" onClick="{{ closeMenu }}" style="{{ menuLinkStyle0 }}">Roteiros</a>
-    <a href="../../index.html#guia" onClick="{{ closeMenu }}" style="{{ menuLinkStyle1 }}">Zeca Blak</a>
-    <a href="../../index.html#agenda" onClick="{{ closeMenu }}" style="{{ menuLinkStyle2 }}">Grupo</a>
-    <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" onClick="{{ closeMenu }}" style="{{ menuLinkStyle3 }}">Bora?</a>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <a href="../" onClick="{{ closeMenu }}" style="{{ menuLinkStyle0 }}">Roteiros</a>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <a href="../#niteroi" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.75); font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-family:'Manrope',sans-serif; font-size:0.95rem;">Niterói</a>
+        <a href="../#regiao-serrana" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.75); font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-family:'Manrope',sans-serif; font-size:0.95rem;">Região Serrana</a>
+        <a href="../#cidade-do-rio" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.75); font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-family:'Manrope',sans-serif; font-size:0.95rem;">Cidade do Rio</a>
+        <a href="../#fora-do-estado" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.75); font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-family:'Manrope',sans-serif; font-size:0.95rem;">Fora do Estado</a>
+        <a href="../#internacional" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.75); font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-family:'Manrope',sans-serif; font-size:0.95rem;">Internacional</a>
+      </div>
+    </div>
+    <a href="../../index.html#agenda" onClick="{{ closeMenu }}" style="{{ menuLinkStyle1 }}">Grupo</a>
+    <a href="https://wa.me/5521984885282" target="_blank" rel="noreferrer" onClick="{{ closeMenu }}" style="{{ menuLinkStyle2 }}">Bora?</a>
   </div>
 
   <main>
@@ -116,7 +135,7 @@
           <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Itinerário detalhado, ponto de encontro e valor da saída são combinados diretamente com o Zeca — sem agenda fixa, a saída combina com o clima.</p>
 
           <div style="margin-top:40px; display:flex; flex-wrap:wrap; gap:12px;">
-            <a href="https://wa.me/5521999999999?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+            <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
             <a href="../" style="border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.3); padding:16px 32px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">Ver outros roteiros</a>
           </div>
         </div>
@@ -160,7 +179,7 @@
         <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:28px 0 0; font-size:clamp(2.75rem,6vw,5.5rem); color:#fff;">Bora pra Tapera?</h2>
         <p style="font-weight:200; letter-spacing:-0.01em; margin:20px auto 0; max-width:30rem; font-size:1.1rem; color:rgba(255,255,255,0.85);">Consulte a disponibilidade e fala com o Zeca no WhatsApp pra garantir sua vaga.</p>
         <div style="margin-top:36px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;">
-          <a href="https://wa.me/5521999999999?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
+          <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
         </div>
       </div>
     </section>
@@ -271,6 +290,7 @@ class Component extends DCLogic {
       { n: '01', titulo: 'Guia certificado', texto: 'Guia CADASTUR (nacional e regional RJ), atendimento em português, inglês e espanhol, e curso de primeiros socorros em ambiente selvagem (WFA).' },
       { n: '02', titulo: 'Experiência em campo', texto: 'Mais de 15 anos nas trilhas do estado do Rio de Janeiro, com dezenas de saídas conduzidas pelo Zeca Blak.' },
       { n: '03', titulo: 'Equipamento de apoio', texto: 'Kit de primeiros socorros, rádio comunicador, rastreador satelital (Spot) e corda de apoio nos trechos mais técnicos.' },
+      { n: '04', titulo: 'Atenção com iniciantes', texto: 'Ritmo e explicações ajustados pra quem está saindo pela primeira vez.' },
     ].map((s, i) => ({ ...s, revealStyle: this.revealStyle('seg-' + i, i * 90), revealRef: this.revealRef('seg-' + i) }));
 
     return {
@@ -310,8 +330,8 @@ class Component extends DCLogic {
         pointerEvents: menuOpen ? 'auto' : 'none',
         transition: 'opacity 0.35s ease',
       },
-      ...['Roteiros', 'Zeca Blak', 'Agenda', 'Bora?'].reduce((acc, _, i) => {
-        acc['menuLinkStyle' + i] = i < 3
+      ...['Roteiros', 'Grupo', 'Bora?'].reduce((acc, _, i) => {
+        acc['menuLinkStyle' + i] = i < 2
           ? { color: '#fff', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', fontFamily: "'Manrope',sans-serif", fontSize: '2rem', opacity: menuOpen ? 1 : 0, transform: menuOpen ? 'translateY(0)' : 'translateY(12px)', transition: `opacity 0.35s ease ${menuOpen ? 0.1 + i * 0.06 : 0}s, transform 0.35s ease ${menuOpen ? 0.1 + i * 0.06 : 0}s` }
           : { marginTop: '12px', borderRadius: '9999px', background: 'oklch(0.708 0.181 127.1)', padding: '16px 36px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.85rem', opacity: menuOpen ? 1 : 0, transform: menuOpen ? 'translateY(0)' : 'translateY(12px)', transition: `opacity 0.35s ease ${menuOpen ? 0.1 + i * 0.06 : 0}s, transform 0.35s ease ${menuOpen ? 0.1 + i * 0.06 : 0}s` };
         return acc;
