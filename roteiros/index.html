@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roteiros — Tarja Verde Aventuras</title>
-<meta name="description" content="Castelos do Açu, Circuito 3D, Tapera + Zé Mundrongo e a expedição pra Aurora Boreal: os roteiros guiados do Tarja Verde na Região Serrana do Rio de Janeiro.">
+<meta name="description" content="Roteiros guiados do Tarja Verde em Niterói, Região Serrana, Cidade do Rio e expedições internacionais — escolha o seu e combine a saída direto com o Zeca no WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tarja Verde Aventuras">
 <meta property="og:title" content="Roteiros — Tarja Verde Aventuras">
-<meta property="og:description" content="Castelos do Açu, Circuito 3D, Tapera + Zé Mundrongo e a expedição pra Aurora Boreal: os roteiros guiados do Tarja Verde na Região Serrana do Rio de Janeiro.">
+<meta property="og:description" content="Roteiros guiados do Tarja Verde em Niterói, Região Serrana, Cidade do Rio e expedições internacionais — escolha o seu e combine a saída direto com o Zeca no WhatsApp.">
 <meta property="og:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/og/og-home.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/roteiros/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Roteiros — Tarja Verde Aventuras">
-<meta name="twitter:description" content="Castelos do Açu, Circuito 3D, Tapera + Zé Mundrongo e a expedição pra Aurora Boreal: os roteiros guiados do Tarja Verde na Região Serrana do Rio de Janeiro.">
+<meta name="twitter:description" content="Roteiros guiados do Tarja Verde em Niterói, Região Serrana, Cidade do Rio e expedições internacionais — escolha o seu e combine a saída direto com o Zeca no WhatsApp.">
 <meta name="twitter:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/og/og-home.png">
 <script src="../support.js"></script>
 </head>
@@ -52,7 +52,7 @@
         <nav style="{{ desktopNavStyle }}">
           <a href="#topo" style="{{ navLinkStyle }}">Roteiros</a>
           <a href="../index.html#guia" style="{{ navLinkStyle }}">Zeca Blak</a>
-          <a href="../index.html#agenda" style="{{ navLinkStyle }}">Agenda</a>
+          <a href="../index.html#agenda" style="{{ navLinkStyle }}">Grupo</a>
           <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:12px 20px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Bora?</a>
         </nav>
         <button aria-label="Abrir menu" onClick="{{ toggleMenu }}" style="{{ hamburgerBtnStyle }}">
@@ -67,54 +67,86 @@
   <div style="{{ menuOverlayStyle }}">
     <a href="#topo" onClick="{{ closeMenu }}" style="{{ menuLinkStyle0 }}">Roteiros</a>
     <a href="../index.html#guia" onClick="{{ closeMenu }}" style="{{ menuLinkStyle1 }}">Zeca Blak</a>
-    <a href="../index.html#agenda" onClick="{{ closeMenu }}" style="{{ menuLinkStyle2 }}">Agenda</a>
+    <a href="../index.html#agenda" onClick="{{ closeMenu }}" style="{{ menuLinkStyle2 }}">Grupo</a>
     <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" onClick="{{ closeMenu }}" style="{{ menuLinkStyle3 }}">Bora?</a>
   </div>
 
   <main>
 
-    <section id="topo" style="padding:172px clamp(20px,6vw,40px) 64px;">
+    <section id="topo" style="padding:172px clamp(20px,6vw,40px) 48px;">
       <div style="margin:0 auto; max-width:110rem;">
         <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">
           <a href="../index.html#topo" style="color:inherit;">Tarja Verde</a> / Roteiros
         </p>
         <h1 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.9; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(3rem,6vw,6.5rem);">Roteiros<span style="color:oklch(0.735 0.185 53.8);">.</span></h1>
-        <p style="font-weight:200; letter-spacing:-0.01em; margin:20px 0 0; max-width:36rem; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.8);">Todas as aventuras guiadas na Região Serrana do Rio — escolha a sua e chame o Zeca no WhatsApp.</p>
+        <p style="font-weight:200; letter-spacing:-0.01em; margin:20px 0 0; max-width:40rem; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.8);">De Niterói à Região Serrana, do Rio às expedições internacionais — escolha a região, veja o roteiro e chame o Zeca no WhatsApp. Sem agenda fixa: a saída combina com o clima.</p>
       </div>
     </section>
 
-    <section style="padding-bottom:96px;">
-      <div style="display:flex; flex-direction:column;">
-        <sc-for list="{{ roteiros }}" as="r" hint-placeholder-count="4">
-          <article style="position:relative; display:flex; min-height:70svh; height:34rem; width:100%; align-items:flex-end;">
-            <div style="position:absolute; inset:0; overflow:hidden;">
-              <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
-            </div>
-            <div style="{{ r.overlayStyle }}"></div>
-            <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:0 clamp(20px,6vw,40px) 56px;">
-              <div ref="{{ r.revealRef }}" style="{{ r.revealStyle }}">
-                <div style="{{ r.contentStyle }} max-width:42rem;">
-                  <div style="{{ r.rowJustify }} display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
-                    <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">{{ r.nivel }}</span>
-                    <span style="border-radius:9999px; border:1px solid rgba(255,255,255,0.4); padding:8px 20px; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.85);">{{ r.local }}</span>
-                  </div>
-                  <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.9; letter-spacing:-0.035em; text-transform:uppercase; margin:20px 0 0; font-size:clamp(2.5rem,5.8vw,5rem); color:#fff;">{{ r.nome }}</h2>
-                  <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:rgba(255,255,255,0.85);">{{ r.nota }}</p>
-                  <div style="{{ r.rowJustify }} margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
-                    <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.708 0.181 127.1);">Próxima: {{ r.proxima }}</span>
-                    <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">{{ r.duracao }}</span>
-                    <sc-if value="{{ r.detalhe }}">
-                      <a href="{{ r.detalhe }}" style="border-radius:9999px; border:2px solid rgba(255,255,255,0.7); padding:12px 24px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:#fff; color:oklch(0.354 0.067 58.6);">Ver roteiro</a>
-                    </sc-if>
-                    <a href="https://wa.me/5521999999999" target="_blank" rel="noreferrer" style="border-radius:9999px; background:#fff; padding:12px 24px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:oklch(0.708 0.181 127.1); color:#fff;">Quero essa</a>
+    <sc-for list="{{ regioes }}" as="reg" hint-placeholder-count="5">
+      <section style="padding:40px clamp(20px,6vw,40px) 0;">
+        <div style="margin:0 auto; max-width:110rem; display:flex; flex-direction:column; gap:8px;">
+          <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:0; font-size:clamp(2.25rem,4.5vw,4rem);">{{ reg.nome }}<span style="color:oklch(0.735 0.185 53.8);">.</span></h2>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:0; max-width:38rem; font-size:1.05rem; color:oklch(0.354 0.067 58.6 / 0.75);">{{ reg.descricao }}</p>
+        </div>
+      </section>
+
+      <sc-if value="{{ reg.temRoteiros }}">
+        <section style="padding-bottom:16px;">
+          <div style="display:flex; flex-direction:column;">
+            <sc-for list="{{ reg.roteiros }}" as="r" hint-placeholder-count="2">
+              <article style="position:relative; display:flex; min-height:70svh; height:34rem; width:100%; align-items:flex-end; margin-top:24px;">
+                <div style="position:absolute; inset:0; overflow:hidden;">
+                  <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+                </div>
+                <div style="{{ r.overlayStyle }}"></div>
+                <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:0 clamp(20px,6vw,40px) 56px;">
+                  <div ref="{{ r.revealRef }}" style="{{ r.revealStyle }}">
+                    <div style="{{ r.contentStyle }} max-width:42rem;">
+                      <div style="{{ r.rowJustify }} display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+                        <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">{{ r.nivel }}</span>
+                        <span style="border-radius:9999px; border:1px solid rgba(255,255,255,0.4); padding:8px 20px; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.85);">{{ r.local }}</span>
+                      </div>
+                      <h3 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.9; letter-spacing:-0.035em; text-transform:uppercase; margin:20px 0 0; font-size:clamp(2.5rem,5.8vw,5rem); color:#fff;">{{ r.nome }}</h3>
+                      <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:rgba(255,255,255,0.85);">{{ r.nota }}</p>
+                      <div style="{{ r.rowJustify }} margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
+                        <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">{{ r.duracao }}</span>
+                        <sc-if value="{{ r.detalhe }}">
+                          <a href="{{ r.detalhe }}" style="border-radius:9999px; border:2px solid rgba(255,255,255,0.7); padding:12px 24px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:#fff; color:oklch(0.354 0.067 58.6);">Ver roteiro</a>
+                        </sc-if>
+                        <a href="{{ r.waLink }}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:#fff; padding:12px 24px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:oklch(0.708 0.181 127.1); color:#fff;">Consultar disponibilidade</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </article>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ reg.temEmBreve }}">
+        <section style="padding:16px clamp(20px,6vw,40px) 48px;">
+          <div style="margin:0 auto; max-width:110rem; border-radius:1.5rem; background:oklch(0.895 0.011 112.4); padding:28px clamp(20px,5vw,36px);">
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.52 0.035 62); margin:0 0 16px;">Em curadoria nessa região — chama no WhatsApp</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <sc-for list="{{ reg.emBreve }}" as="eb" hint-placeholder-count="3">
+                <a href="{{ eb.waLink }}" target="_blank" rel="noreferrer" style="border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.25); padding:10px 20px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.18em; font-size:0.65rem; transition:all 0.2s;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">{{ eb.nome }}</a>
+              </sc-for>
             </div>
-          </article>
-        </sc-for>
-      </div>
-    </section>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ reg.semConteudo }}">
+        <section style="padding:16px clamp(20px,6vw,40px) 48px;">
+          <div style="margin:0 auto; max-width:110rem; border-radius:1.5rem; background:oklch(0.895 0.011 112.4); padding:28px clamp(20px,5vw,36px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+            <p style="font-weight:200; letter-spacing:-0.01em; margin:0; font-size:1rem; color:oklch(0.354 0.067 58.6 / 0.8);">Roteiros dessa região ainda em curadoria.</p>
+            <a href="{{ reg.waLinkGenerico }}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:12px 24px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
+          </div>
+        </section>
+      </sc-if>
+    </sc-for>
 
   </main>
 
@@ -122,7 +154,7 @@
     <div style="margin:0 auto; display:flex; max-width:110rem; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px;">
       <div>
         <img src="../assets/logo-horizontal.png" alt="Tarja Verde Aventuras" style="height:40px; width:auto;" />
-        <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:0.9rem; color:oklch(0.52 0.035 62);">Aventuras guiadas na Região Serrana do Rio de Janeiro. Sua dose de natureza.</p>
+        <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:0.9rem; color:oklch(0.52 0.035 62);">Aventuras guiadas em Niterói, Rio de Janeiro e Região Serrana. Sua dose de natureza.</p>
       </div>
       <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
         <a href="https://www.instagram.com/tarjaverdeaventuras/" target="_blank" rel="noreferrer" style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.631 0.161 127.3); transition:opacity 0.2s;" style-hover="opacity:0.7;">/tarjaverdeaventuras</a>
@@ -211,6 +243,10 @@ class Component extends DCLogic {
       : { opacity: 0, transform: 'translateY(16px)' };
   }
 
+  waLink(msg) {
+    return 'https://wa.me/5521999999999?text=' + encodeURIComponent(msg);
+  }
+
   renderVals() {
     const scrolled = this.state.scrolled;
     const isMobile = this.state.isMobile;
@@ -218,27 +254,78 @@ class Component extends DCLogic {
     const barColor = 'oklch(0.354 0.067 58.6)';
     const barStyleBase = { display: 'block', width: '24px', height: '2px', background: menuOpen ? '#fff' : barColor, transition: 'transform 0.2s, opacity 0.2s' };
 
-    const roteirosBase = [
-      { nome: 'Castelos do Açu', video: '../assets/media/castelos-hero.mp4', poster: '../assets/media/castelos-poster.jpg', nivel: 'Moderada', local: 'Região Serrana do RJ', duracao: '6–7h', proxima: '16/08', nota: 'Torres de granito acima do mar de nuvens.', detalhe: null },
-      { nome: 'Circuito 3D', video: '../assets/media/circuito3d-hero.mp4', poster: '../assets/media/circuito3d-poster.jpg', nivel: 'Fácil / moderada', local: 'Região Serrana do RJ', duracao: '4–5h', proxima: '23/08', nota: "Três quedas d'água em mata atlântica fechada.", detalhe: null },
-      { nome: 'Tapera + Zé Mundrongo', video: '../assets/media/tapera-hero.mp4', poster: '../assets/media/tapera-poster.jpg', nivel: 'Moderada', local: 'Região Serrana do RJ', duracao: '5–6h', proxima: '06/09', nota: 'Campos de altitude, ruínas e neblina rasteira.', detalhe: 'tapera-e-ze-mundrongo/' },
-      { nome: 'Aurora Boreal', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', proxima: '27/09', nota: 'A aventura mais longa da agenda: céu em movimento.', detalhe: null },
+    const regioesBase = [
+      {
+        nome: 'Niterói',
+        descricao: 'Bate e volta saindo de Niterói — pra quem quer trilha sem sair da cidade.',
+        roteiros: [
+          { nome: 'Tapera + Zé Mundrongo', video: '../assets/media/tapera-hero.mp4', poster: '../assets/media/tapera-poster.jpg', nivel: 'Moderada', local: 'Niterói, RJ', duracao: '5–6h', nota: 'Campos de altitude, ruínas e neblina rasteira.', detalhe: 'tapera-e-ze-mundrongo/' },
+        ],
+        emBreve: ['Costão de Itacoatiara', 'Parque da Cidade', 'Tupinambás', 'Travessia Tupinambás', 'Morro das Andorinhas'],
+      },
+      {
+        nome: 'Região Serrana',
+        descricao: 'Bate e voltas e travessias de vários dias na Serra Fluminense.',
+        roteiros: [
+          { nome: 'Castelos do Açu', video: '../assets/media/castelos-hero.mp4', poster: '../assets/media/castelos-poster.jpg', nivel: 'Moderada', local: 'Petrópolis, RJ', duracao: '6–7h', nota: 'Torres de granito acima do mar de nuvens.', detalhe: null },
+          { nome: 'Circuito 3D', video: '../assets/media/circuito3d-hero.mp4', poster: '../assets/media/circuito3d-poster.jpg', nivel: 'Fácil / moderada', local: 'Cachoeiras de Macacu, RJ', duracao: '4–5h', nota: "Três quedas d'água em mata atlântica fechada.", detalhe: null },
+        ],
+        emBreve: ['Mirante do Inferno', 'Portela', 'Travessia Petrópolis–Teresópolis (3 dias)', 'Pedra do Sino'],
+      },
+      {
+        nome: 'Cidade do Rio',
+        descricao: 'Roteiros clássicos e trilhas urbanas no Rio de Janeiro.',
+        roteiros: [],
+        emBreve: [],
+      },
+      {
+        nome: 'Fora do Estado',
+        descricao: 'Expedições além do Rio de Janeiro.',
+        roteiros: [],
+        emBreve: ['Ibitipoca'],
+      },
+      {
+        nome: 'Internacional',
+        descricao: 'Expedições internacionais guiadas pelo Zeca.',
+        roteiros: [
+          { nome: 'Aurora Boreal', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', nota: 'A aventura mais longa da agenda: céu em movimento.', detalhe: null },
+        ],
+        emBreve: [],
+      },
     ];
 
-    const roteiros = roteirosBase.map((r, i) => {
-      const reverse = i % 2 === 1;
+    let i = 0;
+    const regioes = regioesBase.map((reg) => {
+      const roteiros = reg.roteiros.map((r) => {
+        const idx = i++;
+        const reverse = idx % 2 === 1;
+        return {
+          ...r,
+          waLink: this.waLink('Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
+          overlayStyle: {
+            position: 'absolute', inset: 0,
+            background: reverse
+              ? 'linear-gradient(to top right, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.6) 55%, oklch(0.279 0.047 56.2 / 0.3))'
+              : 'linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.55) 55%, oklch(0.279 0.047 56.2 / 0.25))',
+          },
+          contentStyle: reverse ? 'margin-left:auto; text-align:right;' : '',
+          rowJustify: reverse ? 'justify-content:flex-end;' : '',
+          revealStyle: this.revealStyle('roteiro-' + idx),
+          revealRef: this.revealRef('roteiro-' + idx),
+        };
+      });
+      const emBreve = reg.emBreve.map((nome) => ({
+        nome,
+        waLink: this.waLink('Oi Zeca! Ainda não vi o roteiro "' + nome + '" no site — tenho interesse, me conta mais?'),
+      }));
       return {
-        ...r,
-        overlayStyle: {
-          position: 'absolute', inset: 0,
-          background: reverse
-            ? 'linear-gradient(to top right, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.6) 55%, oklch(0.279 0.047 56.2 / 0.3))'
-            : 'linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.55) 55%, oklch(0.279 0.047 56.2 / 0.25))',
-        },
-        contentStyle: reverse ? 'margin-left:auto; text-align:right;' : '',
-        rowJustify: reverse ? 'justify-content:flex-end;' : '',
-        revealStyle: this.revealStyle('roteiro-' + i),
-        revealRef: this.revealRef('roteiro-' + i),
+        ...reg,
+        roteiros,
+        emBreve,
+        temRoteiros: roteiros.length > 0,
+        temEmBreve: emBreve.length > 0,
+        semConteudo: roteiros.length === 0 && emBreve.length === 0,
+        waLinkGenerico: this.waLink('Oi Zeca! Quero saber mais sobre roteiros em ' + reg.nome + '.'),
       };
     });
 
@@ -247,7 +334,7 @@ class Component extends DCLogic {
         ? { borderBottom: '1px solid oklch(0.354 0.067 58.6 / 0.16)', background: 'oklch(0.96 0.009 100 / 0.9)', backdropFilter: 'blur(12px)', position: 'relative' }
         : { borderBottom: '1px solid oklch(0.354 0.067 58.6 / 0.16)', background: 'oklch(0.96 0.009 100 / 0.9)', backdropFilter: 'blur(12px)', position: 'relative' },
       navLinkStyle: { color: 'oklch(0.354 0.067 58.6 / 0.7)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem' },
-      roteiros,
+      regioes,
       desktopNavStyle: { display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: '28px' },
       hamburgerBtnStyle: {
         display: isMobile ? 'flex' : 'none', flexDirection: 'column', gap: '6px', alignItems: 'center', justifyContent: 'center',
