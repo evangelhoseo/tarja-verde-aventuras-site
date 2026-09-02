@@ -119,7 +119,10 @@
             Sua dose<br />de <span style="color:oklch(0.708 0.181 127.1);">natureza</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
           </h1>
           <div style="{{ heroCtaRowStyle }}">
-            <p style="{{ heroParagraphStyle }}">Em um mundo hiperconectado, o <strong style="font-weight:700; color:#fff;">Tarja Verde</strong> é a receita perfeita para você se desligar da rotina com calma, oferecendo saúde, vigor e aventura em doses diárias para se reconectar consigo mesmo.</p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <p style="{{ heroParagraphStyle }}">Em um mundo hiperconectado, o <strong style="font-weight:700; color:#fff;">Tarja Verde</strong> é a receita perfeita para você se desligar da rotina com calma, oferecendo saúde, vigor e aventura em doses diárias para se reconectar consigo mesmo.</p>
+              <p style="font-weight:700; letter-spacing:-0.01em; margin:0; max-width:28rem; font-size:1rem; color:oklch(0.708 0.181 127.1);">Iniciantes e experientes chegaram no lugar certo. Bora com o Tarja Verde.</p>
+            </div>
             <div style="{{ heroButtonsRowStyle }}">
               <a href="roteiros/" style="{{ heroBtnPrimaryStyle }}" style-hover="background:oklch(0.631 0.161 127.3);">Ver roteiros</a>
               <a href="https://wa.me/5521984885282" target="_blank" rel="noreferrer" style="{{ heroBtnSecondaryStyle }}" style-hover="background:#fff; color:oklch(0.354 0.067 58.6);">Falar no WhatsApp</a>
@@ -201,6 +204,7 @@
             <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Segurança em primeiro lugar</p>
             <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.92; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2.5rem,4.6vw,4.25rem);">Zeca Blak</h2>
             <p style="font-weight:200; letter-spacing:-0.01em; margin:20px 0 0; max-width:28rem; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.8);">Guia Regional RJ e Nacional, com vasta experiência em trilhas, atrativos naturais e turismo de aventura.</p>
+            <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; max-width:28rem; font-size:1rem; color:oklch(0.354 0.067 58.6 / 0.7);">Empresário há 30 anos no ramo de gastronomia, o Zeca mudou o jogo em 2022: hoje é dedicado ao turismo de aventura e alto luxo, acompanhando grupos pelo Brasil e fora.</p>
           </div>
           <div style="{{ segurancaListStyle }}">
             <sc-for list="{{ seguranca }}" as="s" hint-placeholder-count="3">
@@ -233,6 +237,7 @@
             <a href="https://chat.whatsapp.com/" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Entrar no grupo</a>
             <a href="https://wa.me/5521984885282" target="_blank" rel="noreferrer" style="border-radius:9999px; border:2px solid rgba(255,255,255,0.7); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:#fff; color:oklch(0.354 0.067 58.6);">Falar com o Zeca</a>
           </div>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:32px auto 0; max-width:28rem; font-size:0.95rem; color:rgba(255,255,255,0.65);">De olho em parcerias e trocar ideia com quem também vive de aventura? Bora tomar um café? Que tal um café com bolo?</p>
         </div>
       </div>
     </section>
@@ -257,7 +262,12 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { scrolled: false, visible: {}, isMobile: false, menuOpen: false };
+  STATS = [
+    { target: 15, suffix: '+', label: 'anos de trilha no Rio de Janeiro' },
+    { target: 60, suffix: '+', label: 'saídas conduzidas' },
+    { target: 4, suffix: '', label: 'roteiros no cardápio' },
+  ];
+  state = { scrolled: false, visible: {}, isMobile: false, menuOpen: false, counts: {} };
   _targets = new Map();
   _ticking = false;
 
@@ -270,6 +280,8 @@ class Component extends DCLogic {
         if (rect.top < vh * 0.94 && rect.bottom > 0) {
           this._targets.delete(key);
           this.setState((s) => ({ visible: { ...s.visible, [key]: true } }));
+          const m = /^stat-(\d+)$/.exec(key);
+          if (m) this._startCounter(Number(m[1]));
         }
       });
     };
@@ -317,6 +329,20 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this._onResize);
     document.removeEventListener('visibilitychange', this._keepVideosPlaying);
     clearInterval(this._videoWatchdog);
+  }
+
+  _startCounter(i) {
+    const cfg = this.STATS[i];
+    if (!cfg || this.state.counts[i] === cfg.target) return;
+    const duration = 1200;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      this.setState((s) => ({ counts: { ...s.counts, [i]: Math.round(eased * cfg.target) } }));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   revealRef(key) {
@@ -370,17 +396,19 @@ class Component extends DCLogic {
       };
     });
 
-    const stats = [
-      { num: '15+', label: 'anos de trilha no Rio de Janeiro' },
-      { num: '60+', label: 'saídas conduzidas' },
-      { num: '4', label: 'roteiros no cardápio' },
-    ].map((s, i) => ({ ...s, revealStyle: this.revealStyle('stat-' + i, i * 90), revealRef: this.revealRef('stat-' + i) }));
+    const stats = this.STATS.map((s, i) => ({
+      ...s,
+      num: (this.state.counts[i] ?? 0) + s.suffix,
+      revealStyle: this.revealStyle('stat-' + i, i * 90),
+      revealRef: this.revealRef('stat-' + i),
+    }));
 
     const seguranca = [
       { n: '01', titulo: 'Guia certificado', texto: 'Guia CADASTUR (nacional e regional RJ), atendimento em português, inglês e espanhol.' },
       { n: '02', titulo: 'Experiência em campo', texto: 'Mais de 15 anos nas trilhas do estado do Rio de Janeiro, com dezenas de saídas conduzidas pelo Zeca Blak.' },
       { n: '03', titulo: 'Equipamento de apoio', texto: 'Kit de primeiros socorros, rádio comunicador, rastreador satelital (Spot) e corda de apoio nos trechos mais técnicos.' },
       { n: '04', titulo: 'Atenção com iniciantes', texto: 'Ritmo e explicações ajustados pra quem está saindo pela primeira vez.' },
+      { n: '05', titulo: 'Trato com o grupo', texto: 'Muita experiência em lidar com pessoas e imprevistos — atencioso e cuidadoso em cada saída.' },
     ].map((s, i) => ({ ...s, revealStyle: this.revealStyle('seg-' + i, i * 90), revealRef: this.revealRef('seg-' + i) }));
 
     return {
