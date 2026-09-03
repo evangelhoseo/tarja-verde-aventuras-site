@@ -149,7 +149,7 @@
 
         <div ref="{{ fotoRef }}" style="{{ fotoReveal }}">
           <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-            <div style="position:relative; width:min(80%, 22rem); aspect-ratio:1;">
+            <div style="position:relative; width:min(80%, 22rem); aspect-ratio:1; touch-action:pan-y;" onPointerDown="{{ albumSwipeStart }}" onPointerUp="{{ albumSwipeEnd }}" onPointerCancel="{{ albumSwipeCancel }}">
               <sc-for list="{{ album }}" as="a" hint-placeholder-count="3">
                 <div style="{{ a.slotStyle }}" onClick="{{ a.onClick }}">
                   <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); width:100%; height:100%; box-sizing:border-box;">
@@ -183,7 +183,7 @@
             <button onClick="{{ albumPrevStop }}" aria-label="Anterior" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:9999px; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.5rem; cursor:pointer;">‹</button>
             <button onClick="{{ albumNextStop }}" aria-label="Próxima" style="position:absolute; right:24px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:9999px; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.5rem; cursor:pointer;">›</button>
           </sc-if>
-          <div style="max-width:90vw; max-height:85vh;" onClick="{{ albumStopClick }}">
+          <div style="max-width:90vw; max-height:85vh; touch-action:pan-y;" onClick="{{ albumStopClick }}" onPointerDown="{{ albumSwipeStart }}" onPointerUp="{{ albumSwipeEnd }}" onPointerCancel="{{ albumSwipeCancel }}">
             <sc-if value="{{ albumActive.type === 'video' }}">
               <video src="{{ albumActive.src }}" poster="{{ albumActive.poster }}" style="display:block; max-width:90vw; max-height:85vh; border-radius:8px;" autoplay muted loop playsinline controls></video>
             </sc-if>
@@ -296,6 +296,11 @@ class Component extends DCLogic {
     { type: 'photo', src: '../../assets/_prototype/icarai.jpg', alt: 'Praia de Icaraí' },
     { type: 'photo', src: '../../assets/_prototype/piratininga.jpg', alt: 'Lagoa de Piratininga' },
   ];
+  // slot "saindo" (a foto que acabou de ser trocada) joga pra baixo-esquerda,
+  // diferente da pilha que espera atrás (cima-direita) — dá a sensação de
+  // embaralhar/tocar a foto pra fora, tipo o efeito de álbum do iPad
+  _albumExitStyle = { transform: 'translate(-64px,20px) rotate(-16deg) scale(0.8)', zIndex: 0, opacity: 0 };
+  _albumHiddenStyle = { transform: 'translate(46px,-38px) rotate(-12deg) scale(0.8)', zIndex: 0, opacity: 0 };
   _albumSlotStyles = [
     { transform: 'translate(0,0) rotate(0deg) scale(1)', zIndex: 3, opacity: 1 },
     { transform: 'translate(20px,-16px) rotate(6deg) scale(0.94)', zIndex: 2, opacity: 0.92 },
@@ -312,6 +317,21 @@ class Component extends DCLogic {
   albumStopClick = (e) => { e.stopPropagation(); };
   albumPrevStop = (e) => { e.stopPropagation(); this.albumPrev(); };
   albumNextStop = (e) => { e.stopPropagation(); this.albumNext(); };
+
+  // swipe (mouse ou touch, unificados via Pointer Events) — arrasta o dedo/mouse
+  // pra esquerda passa a próxima, pra direita volta. Threshold evita disparar
+  // com toques pequenos (que continuam funcionando como clique normal).
+  _swipeStartX = null;
+  albumSwipeStart = (e) => { this._swipeStartX = e.clientX; };
+  albumSwipeEnd = (e) => {
+    if (this._swipeStartX == null) return;
+    const dx = e.clientX - this._swipeStartX;
+    this._swipeStartX = null;
+    const THRESHOLD = 40;
+    if (dx > THRESHOLD) this.albumPrev();
+    else if (dx < -THRESHOLD) this.albumNext();
+  };
+  albumSwipeCancel = () => { this._swipeStartX = null; };
 
   componentDidMount() {
     this._checkReveals = () => {
@@ -396,7 +416,7 @@ class Component extends DCLogic {
     const albumLen = this._albumItems.length;
     const album = this._albumItems.map((item, i) => {
       const rel = (i - this.state.albumIndex + albumLen) % albumLen;
-      const slot = this._albumSlotStyles[rel] || { transform: this._albumSlotStyles[2].transform, zIndex: 0, opacity: 0 };
+      const slot = rel <= 2 ? this._albumSlotStyles[rel] : (rel === albumLen - 1 ? this._albumExitStyle : this._albumHiddenStyle);
       return {
         ...item,
         slotStyle: {
@@ -460,6 +480,9 @@ class Component extends DCLogic {
       albumOpenZoom: this.albumOpenZoom,
       albumCloseZoom: this.albumCloseZoom,
       albumStopClick: this.albumStopClick,
+      albumSwipeStart: this.albumSwipeStart,
+      albumSwipeEnd: this.albumSwipeEnd,
+      albumSwipeCancel: this.albumSwipeCancel,
       paradas,
       seguranca,
       contentGridCols: isMobile ? '1fr' : 'minmax(0,1.2fr) minmax(0,0.8fr)',
