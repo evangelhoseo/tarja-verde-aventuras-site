@@ -139,7 +139,12 @@
       </div>
       <div style="position:absolute; inset:0; background:linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.4) 55%, oklch(0.279 0.047 56.2 / 0.65));"></div>
 
-      <div style="position:relative; z-index:10; margin:0 auto; display:flex; flex:1; width:100%; max-width:110rem; flex-direction:column; justify-content:flex-end; padding:64px clamp(20px,6vw,40px) 56px;">
+      <!-- {{ heroContentStyle }}/{{ heroReveal }}/{{ heroCtaRowStyle }}/{{ heroButtonsRowStyle }}
+           e os 2 botões abaixo são o MESMO padrão do hero da Home (Flávio,
+           03/09/2026: "o hero deve ter a mesma formatação — alinhamento,
+           comportamento mobile, botões CTA"). Não simplificar pra badges de
+           texto solto de novo. -->
+      <div style="{{ heroContentStyle }}">
         <div ref="{{ heroRef }}" style="{{ heroReveal }}">
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.75); margin:0 0 20px;">
             <a href="../../index.html#topo" style="color:inherit;">Tarja Verde</a> / <a href="../" style="color:inherit;">Roteiros</a> / {{NOME}}
@@ -151,13 +156,18 @@
           <h1 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.88; letter-spacing:-0.035em; text-transform:uppercase; margin:24px 0 0; font-size:clamp(2.75rem, 8vw, 7.5rem); color:#fff;">
             {{NOME_L1}}<br />{{NOME_L2_PREFIXO}}<span style="color:oklch(0.708 0.181 127.1);">{{NOME_L2_DESTAQUE}}</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
           </h1>
-          <div style="margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.708 0.181 127.1);">Consulte disponibilidade</span>
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: {{DURACAO}}</span>
-            <!-- OPCIONAL, cada um só entra se o dado existir na planilha do Zeca (pedido dele na reunião: distância, altimetria e GPS) -->
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Distância: {{DISTANCIA}}</span>
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Altimetria: {{ALTIMETRIA}}</span>
-            <a href="https://www.google.com/maps?q={{GPS_LAT}},{{GPS_LONG}}" target="_blank" rel="noreferrer" style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7); text-decoration:underline; text-underline-offset:3px;" style-hover="color:#fff;">Ver no mapa ↗</a>
+          <div style="{{ heroCtaRowStyle }}">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <p style="{{ heroParagraphStyle }}">Duração: {{DURACAO}}</p>
+              <!-- OPCIONAL, cada um só entra se o dado existir na planilha do Zeca (pedido dele na reunião: distância, altimetria e GPS) -->
+              <p style="{{ heroParagraphStyle }}">Distância: {{DISTANCIA}}</p>
+              <p style="{{ heroParagraphStyle }}">Altimetria: {{ALTIMETRIA}}</p>
+              <a href="https://www.google.com/maps?q={{GPS_LAT}},{{GPS_LONG}}" target="_blank" rel="noreferrer" style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7); text-decoration:underline; text-underline-offset:3px;" style-hover="color:#fff;">Ver no mapa ↗</a>
+            </div>
+            <div style="{{ heroButtonsRowStyle }}">
+              <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="{{ heroBtnPrimaryStyle }}" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+              <a href="../" style="{{ heroBtnSecondaryStyle }}" style-hover="background:#fff; color:oklch(0.354 0.067 58.6);">Ver outros roteiros</a>
+            </div>
           </div>
         </div>
       </div>
@@ -460,7 +470,21 @@ class Component extends DCLogic {
         : { height: '3.5rem', width: 'auto', filter: 'drop-shadow(0 3px 14px rgba(0,0,0,0.65))', transition: 'all 0.5s' },
       navLinkStyle: scrolled ? { color: 'oklch(0.354 0.067 58.6 / 0.7)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem' } : { color: 'rgba(255,255,255,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem' },
       heroRef: this.revealRef('hero'),
-      heroReveal: this.revealStyle('hero'),
+      heroReveal: isMobile
+        ? { ...this.revealStyle('hero'), display: 'flex', flexDirection: 'column', height: '100%' }
+        : this.revealStyle('hero'),
+      heroContentStyle: isMobile
+        ? { position: 'relative', zIndex: 10, margin: '0 auto', display: 'flex', flex: 1, width: '100%', maxWidth: '110rem', flexDirection: 'column', justifyContent: 'flex-start', padding: '120px clamp(20px,6vw,40px) 48px' }
+        : { position: 'relative', zIndex: 10, margin: '0 auto', display: 'flex', flex: 1, width: '100%', maxWidth: '110rem', flexDirection: 'column', justifyContent: 'flex-end', padding: '64px clamp(20px,6vw,40px) 90px' },
+      heroCtaRowStyle: isMobile
+        ? { marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '24px', flex: 1 }
+        : { marginTop: '40px', display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px' },
+      heroParagraphStyle: { fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', margin: 0 },
+      heroButtonsRowStyle: isMobile
+        ? { display: 'flex', flexDirection: 'column', gap: '12px', marginTop: 'auto', paddingBottom: '8px' }
+        : { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', flexShrink: 0 },
+      heroBtnPrimaryStyle: { borderRadius: '9999px', background: 'oklch(0.708 0.181 127.1)', padding: '16px 28px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem', transition: 'background-color 0.2s', whiteSpace: 'nowrap', textAlign: 'center' },
+      heroBtnSecondaryStyle: { borderRadius: '9999px', border: '2px solid rgba(255,255,255,0.6)', padding: '16px 28px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.7rem', transition: 'all 0.2s', whiteSpace: 'nowrap', textAlign: 'center' },
       sobreRef: this.revealRef('sobre'),
       sobreReveal: this.revealStyle('sobre'),
       fotoRef: this.revealRef('foto'),
@@ -483,8 +507,8 @@ class Component extends DCLogic {
       seguranca,
       contentGridCols: isMobile ? '1fr' : 'minmax(0,1.2fr) minmax(0,0.8fr)',
       heroSectionStyle: isMobile
-        ? { position: 'relative', display: 'flex', minHeight: '78svh', width: '100%' }
-        : { position: 'relative', display: 'flex', minHeight: '72svh', height: '38rem', width: '100%' },
+        ? { position: 'relative', display: 'flex', height: '100svh', width: '100%' }
+        : { position: 'relative', display: 'flex', minHeight: '80svh', height: '42rem', width: '100%' },
       desktopNavStyle: { display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: '28px' },
       hamburgerBtnStyle: {
         display: isMobile ? 'flex' : 'none', flexDirection: 'column', gap: '6px', alignItems: 'center', justifyContent: 'center',
