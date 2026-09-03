@@ -9,13 +9,21 @@
   {{LOCAL}}, {{DURACAO}}, {{RESUMO_TITULO}}, {{RESUMO_TEXTO}}, {{VIDEO_SRC}},
   {{POSTER_SRC}}, {{FOTO_PRINCIPAL}}, {{WA_MENSAGEM_ENCODED}}.
 
-  Campos opcionais (removem o bloco inteiro se ausentes):
-  {{DISTANCIA}} → badge extra no hero
+  Campos opcionais (removem o badge/bloco inteiro se ausentes — pedido do
+  Zeca na reunião de fechamento do template, 02/09/2026):
+  {{DISTANCIA}} / {{ALTIMETRIA}} / {{GPS_LAT}},{{GPS_LONG}} → badges extras
+    no hero + link "Ver no mapa". Nenhum roteiro tem esse dado ainda.
+  {{FOTO_2}}, {{FOTO_3}}... → fotos extras no colágio "Sobre esse roteiro"
+    (álbum fica JUNTO da descrição, não em seção separada — assim que o
+    Zeca pediu). Com só 1 foto (caso de todos os roteiros hoje), deixar
+    só o cartão do {{FOTO_PRINCIPAL}} e apagar os blocos de foto extra.
   Bloco "INVESTIMENTO" → só se {{PRECO_CARIOCA}} existir na planilha
     (Preço Brasil = carioca * 1,3 ; Preço internacional = carioca * 1,8 —
     regra da própria planilha do Zeca, não recalcular diferente)
-  Bloco "ÁLBUM DE FOTOS" → só se tiver mais de 1 foto (além da principal)
-  {{GPS_LINK}} / {{ALTIMETRIA}} → ainda sem dado em nenhum roteiro (pendência)
+
+  Ideia solta da reunião, NÃO implementada aqui (fora de escopo por ora):
+  animação tipo "zoom do planeta até o mapa" (estilo Google Earth) pro
+  bloco de localização — mencionada como ideia, não como algo fechado.
 -->
 <!DOCTYPE html>
 <html>
@@ -146,8 +154,10 @@
           <div style="margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
             <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.708 0.181 127.1);">Consulte disponibilidade</span>
             <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: {{DURACAO}}</span>
-            <!-- OPCIONAL: só incluir se {{DISTANCIA}} vier preenchida na planilha -->
+            <!-- OPCIONAL, cada um só entra se o dado existir na planilha do Zeca (pedido dele na reunião: distância, altimetria e GPS) -->
             <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Distância: {{DISTANCIA}}</span>
+            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Altimetria: {{ALTIMETRIA}}</span>
+            <a href="https://www.google.com/maps?q={{GPS_LAT}},{{GPS_LONG}}" target="_blank" rel="noreferrer" style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7); text-decoration:underline; text-underline-offset:3px;" style-hover="color:#fff;">Ver no mapa ↗</a>
           </div>
         </div>
       </div>
@@ -168,9 +178,31 @@
           </div>
         </div>
 
+        <!-- ÁLBUM — "fotos jogadas numa mesa" (pedido do Zeca na reunião: o álbum
+             fica AO LADO da descrição, não em seção separada). {{FOTO_PRINCIPAL}}
+             é obrigatória; {{FOTO_2}}, {{FOTO_3}}... são OPCIONAIS — copiar o
+             bloco polaroid e ajustar rotate()/z-index/margin pra cada foto extra
+             que o Zeca mandar. Com só 1 foto, deixar um único cartão centralizado
+             (não inventar foto extra pra preencher o colágio). -->
         <div ref="{{ fotoRef }}" style="{{ fotoReveal }}">
-          <div style="position:relative; aspect-ratio:4/5; width:100%; border-radius:1.5rem; overflow:hidden;">
-            <img src="../../assets/{{FOTO_PRINCIPAL}}" alt="{{NOME}}, {{LOCAL}}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; padding:16px;">
+            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(-6deg); position:relative; z-index:2; width:min(70%, 22rem); margin:0 -12px 16px;">
+              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
+                <img src="../../assets/{{FOTO_PRINCIPAL}}" alt="{{NOME}}, {{LOCAL}}" style="display:block; width:100%; height:100%; object-fit:cover;" />
+              </div>
+            </div>
+            <!-- OPCIONAL: foto extra 2 -->
+            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(5deg); position:relative; z-index:1; width:min(60%, 18rem); margin:24px -12px 0;">
+              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
+                <img src="../../assets/{{FOTO_2}}" alt="{{NOME}}, {{LOCAL}}" style="display:block; width:100%; height:100%; object-fit:cover;" />
+              </div>
+            </div>
+            <!-- OPCIONAL: foto extra 3 -->
+            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(-3deg); position:relative; z-index:3; width:min(55%, 16rem); margin:-16px -12px 0;">
+              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
+                <img src="../../assets/{{FOTO_3}}" alt="{{NOME}}, {{LOCAL}}" style="display:block; width:100%; height:100%; object-fit:cover;" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -202,21 +234,6 @@
           </div>
         </div>
         <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s; white-space:nowrap;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
-      </div>
-    </section>
-
-    <!-- ÁLBUM DE FOTOS — OPCIONAL: só incluir se tiver mais de 1 foto além da
-         principal (a planilha/Zeca ainda não mandou álbum pra nenhum roteiro
-         em 02/09/2026 — remover esta seção inteira enquanto não tiver). -->
-    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
-      <div style="margin:0 auto; max-width:110rem;">
-        <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Álbum</p>
-        <div style="margin-top:24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;">
-          <!-- repetir este bloco de img pra cada foto extra -->
-          <div style="position:relative; aspect-ratio:1; border-radius:1rem; overflow:hidden;">
-            <img src="../../assets/{{FOTO_ALBUM_N}}" alt="{{NOME}}, {{LOCAL}}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
-          </div>
-        </div>
       </div>
     </section>
 
