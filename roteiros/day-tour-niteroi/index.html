@@ -148,21 +148,51 @@
         </div>
 
         <div ref="{{ fotoRef }}" style="{{ fotoReveal }}">
-          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; padding:16px;">
-            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(-4deg); position:relative; z-index:2; width:min(65%, 19rem); margin:0 -12px 16px;">
-              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
-                <img src="../../assets/media/home-hero-poster.jpg" alt="Costão de Itacoatiara, Niterói, RJ" style="display:block; width:100%; height:100%; object-fit:cover;" />
-              </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+            <div style="position:relative; width:min(80%, 22rem); aspect-ratio:1;">
+              <sc-for list="{{ album }}" as="a" hint-placeholder-count="3">
+                <div style="{{ a.slotStyle }}" onClick="{{ a.onClick }}">
+                  <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); width:100%; height:100%; box-sizing:border-box;">
+                    <div style="width:100%; height:100%; overflow:hidden; border-radius:2px;">
+                      <sc-if value="{{ a.type === 'video' }}">
+                        <video src="{{ a.src }}" poster="{{ a.poster }}" style="display:block; width:100%; height:100%; object-fit:cover;" autoplay muted loop playsinline preload="metadata"></video>
+                      </sc-if>
+                      <sc-if value="{{ a.type === 'photo' }}">
+                        <img src="{{ a.src }}" alt="{{ a.alt }}" style="display:block; width:100%; height:100%; object-fit:cover;" />
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
             </div>
-            <!-- cartão de vídeo real (Bullet Costão) — parte literal desse roteiro -->
-            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(5deg); position:relative; z-index:1; width:min(60%, 17rem); margin:20px -12px 0;">
-              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
-                <video src="../../assets/media/home-hero.mp4" poster="../../assets/media/home-hero-poster.jpg" style="display:block; width:100%; height:100%; object-fit:cover;" autoplay muted loop playsinline preload="metadata" aria-label="Subida do Costão de Itacoatiara"></video>
+            <sc-if value="{{ albumHasMultiple }}">
+              <div style="display:flex; align-items:center; gap:20px;">
+                <button onClick="{{ albumPrev }}" aria-label="Foto/vídeo anterior" style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.3); background:transparent; cursor:pointer; font-size:1.1rem; color:oklch(0.354 0.067 58.6); font-family:'Manrope',sans-serif;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">‹</button>
+                <span style="font-weight:700; letter-spacing:0.1em; font-size:0.8rem; color:oklch(0.52 0.035 62); min-width:3rem; text-align:center;">{{ albumPos }}</span>
+                <button onClick="{{ albumNext }}" aria-label="Próxima foto/vídeo" style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.3); background:transparent; cursor:pointer; font-size:1.1rem; color:oklch(0.354 0.067 58.6); font-family:'Manrope',sans-serif;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">›</button>
               </div>
-            </div>
+            </sc-if>
           </div>
         </div>
       </div>
+
+      <sc-if value="{{ albumZoom }}">
+        <div style="position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.92); display:flex; align-items:center; justify-content:center; padding:40px;" onClick="{{ albumCloseZoom }}">
+          <button onClick="{{ albumCloseZoom }}" aria-label="Fechar" style="position:absolute; top:24px; right:24px; width:44px; height:44px; border-radius:9999px; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.3rem; cursor:pointer;">✕</button>
+          <sc-if value="{{ albumHasMultiple }}">
+            <button onClick="{{ albumPrevStop }}" aria-label="Anterior" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:9999px; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.5rem; cursor:pointer;">‹</button>
+            <button onClick="{{ albumNextStop }}" aria-label="Próxima" style="position:absolute; right:24px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:9999px; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.5rem; cursor:pointer;">›</button>
+          </sc-if>
+          <div style="max-width:90vw; max-height:85vh;" onClick="{{ albumStopClick }}">
+            <sc-if value="{{ albumActive.type === 'video' }}">
+              <video src="{{ albumActive.src }}" poster="{{ albumActive.poster }}" style="display:block; max-width:90vw; max-height:85vh; border-radius:8px;" autoplay muted loop playsinline controls></video>
+            </sc-if>
+            <sc-if value="{{ albumActive.type === 'photo' }}">
+              <img src="{{ albumActive.src }}" alt="{{ albumActive.alt }}" style="display:block; max-width:90vw; max-height:85vh; border-radius:8px; object-fit:contain;" />
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
     </section>
 
     <section style="padding:96px clamp(20px,6vw,40px);">
@@ -239,9 +269,29 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { scrolled: false, visible: {}, isMobile: false, menuOpen: false };
+  state = { scrolled: false, visible: {}, isMobile: false, menuOpen: false, albumIndex: 0, albumZoom: false };
   _targets = new Map();
   _ticking = false;
+  _albumItems = [
+    { type: 'video', src: '../../assets/media/home-hero.mp4', poster: '../../assets/media/home-hero-poster.jpg', alt: 'Subida do Costão de Itacoatiara' },
+    { type: 'photo', src: '../../assets/media/home-hero-poster.jpg', alt: 'Costão de Itacoatiara, Niterói, RJ' },
+  ];
+  _albumSlotStyles = [
+    { transform: 'translate(0,0) rotate(0deg) scale(1)', zIndex: 3, opacity: 1 },
+    { transform: 'translate(20px,-16px) rotate(6deg) scale(0.94)', zIndex: 2, opacity: 0.92 },
+    { transform: 'translate(34px,-28px) rotate(-8deg) scale(0.88)', zIndex: 1, opacity: 0.75 },
+  ];
+
+  albumNext = () => this.setState((s) => ({ albumIndex: (s.albumIndex + 1) % this._albumItems.length }));
+  albumPrev = () => this.setState((s) => ({ albumIndex: (s.albumIndex - 1 + this._albumItems.length) % this._albumItems.length }));
+  albumGoTo(i) {
+    return () => this.setState({ albumIndex: i });
+  }
+  albumOpenZoom = () => this.setState({ albumZoom: true });
+  albumCloseZoom = () => this.setState({ albumZoom: false });
+  albumStopClick = (e) => { e.stopPropagation(); };
+  albumPrevStop = (e) => { e.stopPropagation(); this.albumPrev(); };
+  albumNextStop = (e) => { e.stopPropagation(); this.albumNext(); };
 
   componentDidMount() {
     this._checkReveals = () => {
@@ -323,6 +373,22 @@ class Component extends DCLogic {
     const barColor = scrolled || menuOpen ? 'oklch(0.354 0.067 58.6)' : '#fff';
     const barStyleBase = { display: 'block', width: '24px', height: '2px', background: menuOpen ? '#fff' : barColor, transition: 'transform 0.2s, opacity 0.2s' };
 
+    const albumLen = this._albumItems.length;
+    const album = this._albumItems.map((item, i) => {
+      const rel = (i - this.state.albumIndex + albumLen) % albumLen;
+      const slot = this._albumSlotStyles[rel] || { transform: this._albumSlotStyles[2].transform, zIndex: 0, opacity: 0 };
+      return {
+        ...item,
+        slotStyle: {
+          position: 'absolute', inset: 0, transition: 'transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s',
+          cursor: 'pointer', pointerEvents: rel > 2 ? 'none' : 'auto',
+          ...slot,
+        },
+        onClick: rel === 0 ? this.albumOpenZoom : this.albumGoTo(i),
+      };
+    });
+    const albumActive = this._albumItems[this.state.albumIndex];
+
     const paradas = [
       { nome: 'MAC Niterói', texto: 'busca na porta do hotel (5h30/6h) e parada pra fotos, vindo pela orla.' },
       { nome: 'Praia de Icaraí', texto: 'o amanhecer pega o grupo na praia (Icaraí, Boa Viagem ou Praia das Flechas).' },
@@ -356,6 +422,18 @@ class Component extends DCLogic {
       sobreReveal: this.revealStyle('sobre'),
       fotoRef: this.revealRef('foto'),
       fotoReveal: this.revealStyle('foto', 120),
+      album,
+      albumActive,
+      albumHasMultiple: albumLen > 1,
+      albumPos: (this.state.albumIndex + 1) + ' / ' + albumLen,
+      albumZoom: this.state.albumZoom,
+      albumNext: this.albumNext,
+      albumPrev: this.albumPrev,
+      albumPrevStop: this.albumPrevStop,
+      albumNextStop: this.albumNextStop,
+      albumOpenZoom: this.albumOpenZoom,
+      albumCloseZoom: this.albumCloseZoom,
+      albumStopClick: this.albumStopClick,
       paradas,
       seguranca,
       contentGridCols: isMobile ? '1fr' : 'minmax(0,1.2fr) minmax(0,0.8fr)',
