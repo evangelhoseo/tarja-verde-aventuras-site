@@ -169,7 +169,7 @@
       <div style="margin:0 auto; max-width:110rem;">
         <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0 0 24px;">O roteiro do dia</p>
         <div id="mapa-day-tour" style="height:28rem; width:100%; border-radius:1.5rem; overflow:hidden; background:oklch(0.895 0.011 112.4); margin-bottom:32px;" aria-label="Mapa com o trajeto do Day Tour Niterói"></div>
-        <div style="display:flex; flex-direction:column; gap:16px; max-width:48rem;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
           <sc-for list="{{ paradas }}" as="p" hint-placeholder-count="6">
             <div ref="{{ p.revealRef }}" style="{{ p.revealStyle }}">
               <div style="border-radius:9999px 2.5rem 2.5rem 9999px; overflow:hidden; display:flex; align-items:center; gap:20px; background:oklch(0.895 0.011 112.4); padding:24px 32px;">
