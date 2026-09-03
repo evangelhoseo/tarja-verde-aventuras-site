@@ -200,12 +200,24 @@
         <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">O roteiro do dia</p>
         <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:12px 0 32px; font-size:clamp(2rem,4vw,3rem);">Do amanhecer ao pôr do sol, parada por parada</h2>
         <div id="mapa-day-tour" style="height:28rem; width:100%; border-radius:1.5rem; overflow:hidden; background:oklch(0.895 0.011 112.4); margin-bottom:32px;" aria-label="Mapa com o trajeto do Day Tour Niterói"></div>
-        <div style="display:flex; flex-direction:column; gap:16px;">
+        <!-- PROTÓTIPO (não mergear): fotos de cada parada via Wikimedia Commons,
+             só pra visualizar o layout zigzag. Trocar por fotos reais do Zeca
+             antes de publicar — só a do Costão (home-hero-poster.jpg) é nossa. -->
+        <div style="display:flex; flex-direction:column; gap:40px;">
           <sc-for list="{{ paradas }}" as="p" hint-placeholder-count="6">
             <div ref="{{ p.revealRef }}" style="{{ p.revealStyle }}">
-              <div style="border-radius:9999px 2.5rem 2.5rem 9999px; overflow:hidden; display:flex; align-items:center; gap:20px; background:oklch(0.895 0.011 112.4); padding:24px 32px;">
-                <span style="display:flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:9999px; background:#fff; border:2px solid oklch(0.708 0.181 127.1); font-family:'Manrope',sans-serif; font-weight:800; font-size:1rem; color:oklch(0.708 0.181 127.1);">{{ p.numero }}</span>
-                <p style="font-weight:200; letter-spacing:-0.01em; margin:0; font-size:1rem; color:oklch(0.354 0.067 58.6);"><strong style="font-weight:700; color:oklch(0.354 0.067 58.6);">{{ p.nome }}</strong> — {{ p.texto }}</p>
+              <div style="{{ p.rowStyle }}">
+                <div style="flex:1 1 280px;">
+                  <div style="border-radius:9999px 2.5rem 2.5rem 9999px; overflow:hidden; display:flex; align-items:center; gap:20px; background:oklch(0.895 0.011 112.4); padding:24px 32px; height:100%; box-sizing:border-box;">
+                    <span style="display:flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:9999px; background:#fff; border:2px solid oklch(0.708 0.181 127.1); font-family:'Manrope',sans-serif; font-weight:800; font-size:1rem; color:oklch(0.708 0.181 127.1);">{{ p.numero }}</span>
+                    <p style="font-weight:200; letter-spacing:-0.01em; margin:0; font-size:1rem; color:oklch(0.354 0.067 58.6);"><strong style="font-weight:700; color:oklch(0.354 0.067 58.6);">{{ p.nome }}</strong> — {{ p.texto }}</p>
+                  </div>
+                </div>
+                <div style="flex:1 1 280px;">
+                  <div style="position:relative; aspect-ratio:16/10; border-radius:1.25rem; overflow:hidden;">
+                    <img src="{{ p.foto }}" alt="{{ p.nome }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+                  </div>
+                </div>
               </div>
             </div>
           </sc-for>
@@ -390,13 +402,19 @@ class Component extends DCLogic {
     const albumActive = this._albumItems[this.state.albumIndex];
 
     const paradas = [
-      { nome: 'MAC Niterói', texto: 'busca na porta do hotel (5h30/6h) e parada pra fotos, vindo pela orla.' },
-      { nome: 'Praia de Icaraí', texto: 'o amanhecer pega o grupo na praia (Icaraí, Boa Viagem ou Praia das Flechas).' },
-      { nome: 'Lagoa de Piratininga', texto: 'depois do túnel, parada pra observação de aves — horário bom de manhã.' },
-      { nome: 'Costão de Itacoatiara', texto: 'chegada às 8h e subida (quem preferir fica esperando na praia, com segurança).' },
-      { nome: 'Praia de Itaipu', texto: 'descida do Costão e almoço na areia, no camarote.' },
-      { nome: 'Parque da Cidade', texto: 'às 16h, subida pra ver o pôr do sol e retorno ao hotel depois de escurecer.' },
-    ].map((p, i) => ({ ...p, numero: i + 1, revealStyle: this.revealStyle('parada-' + i, i * 70), revealRef: this.revealRef('parada-' + i) }));
+      { nome: 'MAC Niterói', texto: 'busca na porta do hotel (5h30/6h) e parada pra fotos, vindo pela orla.', foto: '../../assets/_prototype/mac.jpg' },
+      { nome: 'Praia de Icaraí', texto: 'o amanhecer pega o grupo na praia (Icaraí, Boa Viagem ou Praia das Flechas).', foto: '../../assets/_prototype/icarai.jpg' },
+      { nome: 'Lagoa de Piratininga', texto: 'depois do túnel, parada pra observação de aves — horário bom de manhã.', foto: '../../assets/_prototype/piratininga.jpg' },
+      { nome: 'Costão de Itacoatiara', texto: 'chegada às 8h e subida (quem preferir fica esperando na praia, com segurança).', foto: '../../assets/media/home-hero-poster.jpg' },
+      { nome: 'Praia de Itaipu', texto: 'descida do Costão e almoço na areia, no camarote.', foto: '../../assets/_prototype/itaipu.jpg' },
+      { nome: 'Parque da Cidade', texto: 'às 16h, subida pra ver o pôr do sol e retorno ao hotel depois de escurecer.', foto: '../../assets/_prototype/parque-da-cidade.jpg' },
+    ].map((p, i) => ({
+      ...p,
+      numero: i + 1,
+      rowStyle: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '24px', flexDirection: i % 2 === 0 ? 'row' : 'row-reverse' },
+      revealStyle: this.revealStyle('parada-' + i, i * 70),
+      revealRef: this.revealRef('parada-' + i),
+    }));
 
     const seguranca = [
       { n: '01', titulo: 'Guia certificado', texto: 'Guia CADASTUR (nacional e regional RJ), atendimento em português, inglês e espanhol.' },
