@@ -1,26 +1,46 @@
+<!--
+  TEMPLATE — não é uma página real do site.
+  Uso: copiar esta pasta inteira pra roteiros/<slug-do-roteiro>/ e preencher os
+  campos entre {{ }}. Remover cada bloco marcado "OPCIONAL" se não tiver o dado
+  correspondente (não inventar número — se a planilha do Zeca diz "A definir",
+  o bloco fica de fora até ele preencher).
+
+  Campos obrigatórios: {{NOME}}, {{NOME_L1}}/{{NOME_L2}}, {{SLUG}}, {{NIVEL}},
+  {{LOCAL}}, {{DURACAO}}, {{RESUMO_TITULO}}, {{RESUMO_TEXTO}}, {{VIDEO_SRC}},
+  {{POSTER_SRC}}, {{FOTO_PRINCIPAL}}, {{WA_MENSAGEM_ENCODED}}.
+
+  Campos opcionais (removem o bloco inteiro se ausentes):
+  {{DISTANCIA}} → badge extra no hero
+  Bloco "INVESTIMENTO" → só se {{PRECO_CARIOCA}} existir na planilha
+    (Preço Brasil = carioca * 1,3 ; Preço internacional = carioca * 1,8 —
+    regra da própria planilha do Zeca, não recalcular diferente)
+  Bloco "ÁLBUM DE FOTOS" → só se tiver mais de 1 foto (além da principal)
+  {{GPS_LINK}} / {{ALTIMETRIA}} → ainda sem dado em nenhum roteiro (pendência)
+-->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <link rel="icon" href="../../assets/favicons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="../../assets/favicons/favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="../../assets/favicons/favicon-16.png" sizes="16x16">
 <link rel="apple-touch-icon" href="../../assets/favicons/apple-touch-icon.png">
-<title>Tapera + Zé Mundrongo — Trilha guiada em Niterói | Tarja Verde Aventuras</title>
-<meta name="description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
+<title>{{NOME}} — Trilha guiada em {{LOCAL}} | Tarja Verde Aventuras</title>
+<meta name="description" content="{{RESUMO_TEXTO_CURTO}}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tarja Verde Aventuras">
-<meta property="og:title" content="Tapera + Zé Mundrongo — Trilha guiada em Niterói">
-<meta property="og:description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
-<meta property="og:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-tapera.jpg">
-<meta property="og:url" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/roteiros/tapera-e-ze-mundrongo/">
+<meta property="og:title" content="{{NOME}} — Trilha guiada em {{LOCAL}}">
+<meta property="og:description" content="{{RESUMO_TEXTO_CURTO}}">
+<meta property="og:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-{{SLUG}}.jpg">
+<meta property="og:url" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/roteiros/{{SLUG}}/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tapera + Zé Mundrongo — Trilha guiada em Niterói">
-<meta name="twitter:description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
-<meta name="twitter:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-tapera.jpg">
+<meta name="twitter:title" content="{{NOME}} — Trilha guiada em {{LOCAL}}">
+<meta name="twitter:description" content="{{RESUMO_TEXTO_CURTO}}">
+<meta name="twitter:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-{{SLUG}}.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TouristTrip","name":"Tapera + Zé Mundrongo","description":"Trilha guiada em Niterói, RJ, com campos de altitude, ruínas e neblina rasteira.","touristType":"Aventura/Trekking","provider":{"@type":"LocalBusiness","name":"Tarja Verde Aventuras"}}
+{"@context":"https://schema.org","@type":"TouristTrip","name":"{{NOME}}","description":"Trilha guiada em {{LOCAL}}.","touristType":"Aventura/Trekking","provider":{"@type":"LocalBusiness","name":"Tarja Verde Aventuras"}}
 </script>
 <script src="../../support.js"></script>
 </head>
@@ -104,54 +124,103 @@
 
   <main>
 
+    <!-- HERO — obrigatório -->
     <section style="{{ heroSectionStyle }}">
       <div style="position:absolute; inset:0; overflow:hidden;">
-        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/tapera-hero.mp4" poster="../../assets/media/tapera-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/{{VIDEO_SRC}}" poster="../../assets/media/{{POSTER_SRC}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div style="position:absolute; inset:0; background:linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.4) 55%, oklch(0.279 0.047 56.2 / 0.65));"></div>
 
       <div style="position:relative; z-index:10; margin:0 auto; display:flex; flex:1; width:100%; max-width:110rem; flex-direction:column; justify-content:flex-end; padding:64px clamp(20px,6vw,40px) 56px;">
         <div ref="{{ heroRef }}" style="{{ heroReveal }}">
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.75); margin:0 0 20px;">
-            <a href="../../index.html#topo" style="color:inherit;">Tarja Verde</a> / <a href="../" style="color:inherit;">Roteiros</a> / Tapera + Zé Mundrongo
+            <a href="../../index.html#topo" style="color:inherit;">Tarja Verde</a> / <a href="../" style="color:inherit;">Roteiros</a> / {{NOME}}
           </p>
           <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
-            <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">Moderada</span>
-            <span style="border-radius:9999px; border:1px solid rgba(255,255,255,0.4); padding:8px 20px; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.85);">Niterói, RJ</span>
+            <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">{{NIVEL}}</span>
+            <span style="border-radius:9999px; border:1px solid rgba(255,255,255,0.4); padding:8px 20px; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.85);">{{LOCAL}}</span>
           </div>
           <h1 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.88; letter-spacing:-0.035em; text-transform:uppercase; margin:24px 0 0; font-size:clamp(2.75rem, 8vw, 7.5rem); color:#fff;">
-            Tapera<br />+ Zé <span style="color:oklch(0.708 0.181 127.1);">Mundrongo</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
+            {{NOME_L1}}<br />{{NOME_L2_PREFIXO}}<span style="color:oklch(0.708 0.181 127.1);">{{NOME_L2_DESTAQUE}}</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
           </h1>
           <div style="margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
             <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.708 0.181 127.1);">Consulte disponibilidade</span>
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: 5–6h</span>
+            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: {{DURACAO}}</span>
+            <!-- OPCIONAL: só incluir se {{DISTANCIA}} vier preenchida na planilha -->
+            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Distância: {{DISTANCIA}}</span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- SOBRE ESSE ROTEIRO — obrigatório -->
     <section style="padding:80px clamp(20px,6vw,40px) 0;">
       <div style="margin:0 auto; display:grid; max-width:110rem; gap:48px; grid-template-columns:{{ contentGridCols }};">
         <div ref="{{ sobreRef }}" style="{{ sobreReveal }}">
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Sobre esse roteiro</p>
-          <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.95; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2rem,4vw,3rem);">Campos de altitude, ruínas e neblina rasteira</h2>
-          <p style="font-weight:200; letter-spacing:-0.01em; margin:24px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Uma trilha de nível moderado por Niterói, passando por campos abertos de altitude e trechos de mata fechada, com vista pra costa rochosa e o mar ao fundo nos pontos mais altos. No caminho, ruínas de uma antiga tapera marcam a paisagem, e a neblina costuma descer rasteira nas primeiras horas da manhã — parte do clima que faz esse roteiro ser um dos favoritos de quem já saiu com o Zeca.</p>
+          <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.95; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2rem,4vw,3rem);">{{RESUMO_TITULO}}</h2>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:24px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">{{RESUMO_TEXTO}}</p>
           <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Itinerário detalhado, ponto de encontro e valor da saída são combinados diretamente com o Zeca — sem agenda fixa, a saída combina com o clima.</p>
 
           <div style="margin-top:40px; display:flex; flex-wrap:wrap; gap:12px;">
-            <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+            <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
             <a href="../" style="border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.3); padding:16px 32px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">Ver outros roteiros</a>
           </div>
         </div>
 
         <div ref="{{ fotoRef }}" style="{{ fotoReveal }}">
           <div style="position:relative; aspect-ratio:4/5; width:100%; border-radius:1.5rem; overflow:hidden;">
-            <img src="../../assets/roteiro-tapera.jpg" alt="Trilha Tapera + Zé Mundrongo, Niterói, RJ" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+            <img src="../../assets/{{FOTO_PRINCIPAL}}" alt="{{NOME}}, {{LOCAL}}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
           </div>
         </div>
       </div>
     </section>
 
+    <!-- INVESTIMENTO — OPCIONAL: só incluir esta seção inteira se {{PRECO_CARIOCA}}
+         existir na planilha do Zeca. Preço Brasil = carioca × 1,3 e Preço
+         internacional = carioca × 1,8 (regra que a planilha já define — não
+         recalcular diferente). PAX e traslado também só aparecem se definidos. -->
+    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
+      <div style="margin:0 auto; max-width:110rem; border-radius:1.5rem; background:oklch(0.895 0.011 112.4); padding:clamp(28px,4vw,48px); display:flex; flex-wrap:wrap; gap:32px; align-items:center; justify-content:space-between;">
+        <div style="display:flex; flex-wrap:wrap; gap:clamp(24px,5vw,56px);">
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Carioca</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_CARIOCA}}</p>
+          </div>
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Brasil</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_BRASIL}}</p>
+          </div>
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Internacional</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_INTERNACIONAL}}</p>
+          </div>
+          <!-- remover este bloco de PAX se {{PAX_MIN}}/{{PAX_MAX}} não vierem definidos -->
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Grupo</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">{{PAX_MIN}}–{{PAX_MAX}} pessoas</p>
+          </div>
+        </div>
+        <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s; white-space:nowrap;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+      </div>
+    </section>
+
+    <!-- ÁLBUM DE FOTOS — OPCIONAL: só incluir se tiver mais de 1 foto além da
+         principal (a planilha/Zeca ainda não mandou álbum pra nenhum roteiro
+         em 02/09/2026 — remover esta seção inteira enquanto não tiver). -->
+    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
+      <div style="margin:0 auto; max-width:110rem;">
+        <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Álbum</p>
+        <div style="margin-top:24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;">
+          <!-- repetir este bloco de img pra cada foto extra -->
+          <div style="position:relative; aspect-ratio:1; border-radius:1rem; overflow:hidden;">
+            <img src="../../assets/{{FOTO_ALBUM_N}}" alt="{{NOME}}, {{LOCAL}}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COM QUEM VOCÊ VAI — obrigatório, texto igual em todos os roteiros -->
     <section style="padding:96px clamp(20px,6vw,40px);">
       <div style="margin:0 auto; max-width:110rem;">
         <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.52 0.035 62); margin:0;">Com quem você vai</p>
@@ -173,17 +242,18 @@
       </div>
     </section>
 
+    <!-- CTA FINAL — obrigatório -->
     <section style="position:relative; display:flex; min-height:60svh; align-items:center; overflow:hidden;">
       <div style="position:absolute; inset:0; overflow:hidden;">
-        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/tapera-hero.mp4" poster="../../assets/media/tapera-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/{{VIDEO_SRC}}" poster="../../assets/media/{{POSTER_SRC}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div style="position:absolute; inset:0; background:oklch(0.279 0.047 56.2 / 0.88);"></div>
       <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:96px clamp(20px,6vw,40px); text-align:center;">
         <img src="../../assets/logo-capsula.png" alt="" aria-hidden="true" style="margin:0 auto; width:72px; height:auto;" />
-        <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:28px 0 0; font-size:clamp(2.75rem,6vw,5.5rem); color:#fff;">Bora pra Tapera?</h2>
+        <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:28px 0 0; font-size:clamp(2.75rem,6vw,5.5rem); color:#fff;">Bora pra {{NOME_CURTO}}?</h2>
         <p style="font-weight:200; letter-spacing:-0.01em; margin:20px auto 0; max-width:30rem; font-size:1.1rem; color:rgba(255,255,255,0.85);">Consulte a disponibilidade e fala com o Zeca no WhatsApp pra garantir sua vaga.</p>
         <div style="margin-top:36px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;">
-          <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
+          <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
         </div>
       </div>
     </section>
