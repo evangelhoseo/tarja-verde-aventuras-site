@@ -7,21 +7,23 @@
 <link rel="icon" type="image/png" href="../../assets/favicons/favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="../../assets/favicons/favicon-16.png" sizes="16x16">
 <link rel="apple-touch-icon" href="../../assets/favicons/apple-touch-icon.png">
-<title>Tapera + Zé Mundrongo — Trilha guiada em Niterói | Tarja Verde Aventuras</title>
-<meta name="description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
+<title>Day Tour Niterói — Passeio guiado de um dia | Tarja Verde Aventuras</title>
+<meta name="description" content="Day tour privativo em Niterói pra quem tá de passagem pelo Rio: orla, observação de aves na Lagoa de Piratininga, trilha no Costão de Itacoatiara e pôr do sol no Parque da Cidade — guiado pelo Zeca Blak.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tarja Verde Aventuras">
-<meta property="og:title" content="Tapera + Zé Mundrongo — Trilha guiada em Niterói">
-<meta property="og:description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
-<meta property="og:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-tapera.jpg">
-<meta property="og:url" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/roteiros/tapera-e-ze-mundrongo/">
+<meta property="og:title" content="Day Tour Niterói — Passeio guiado de um dia">
+<meta property="og:description" content="Day tour privativo em Niterói pra quem tá de passagem pelo Rio: orla, observação de aves na Lagoa de Piratininga, trilha no Costão de Itacoatiara e pôr do sol no Parque da Cidade — guiado pelo Zeca Blak.">
+<meta property="og:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/media/home-hero-poster.jpg">
+<meta property="og:url" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/roteiros/day-tour-niteroi/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tapera + Zé Mundrongo — Trilha guiada em Niterói">
-<meta name="twitter:description" content="Campos de altitude, ruínas e neblina rasteira: a trilha Tapera + Zé Mundrongo, guiada pelo Zeca Blak em Niterói, RJ. 5–6h, nível moderado.">
-<meta name="twitter:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/roteiro-tapera.jpg">
+<meta name="twitter:title" content="Day Tour Niterói — Passeio guiado de um dia">
+<meta name="twitter:description" content="Day tour privativo em Niterói pra quem tá de passagem pelo Rio: orla, observação de aves na Lagoa de Piratininga, trilha no Costão de Itacoatiara e pôr do sol no Parque da Cidade — guiado pelo Zeca Blak.">
+<meta name="twitter:image" content="https://evangelhoseo.github.io/tarja-verde-aventuras-site/assets/media/home-hero-poster.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TouristTrip","name":"Tapera + Zé Mundrongo","description":"Trilha guiada em Niterói, RJ, com campos de altitude, ruínas e neblina rasteira.","touristType":"Aventura/Trekking","provider":{"@type":"LocalBusiness","name":"Tarja Verde Aventuras"}}
+{"@context":"https://schema.org","@type":"TouristTrip","name":"Day Tour Niterói","description":"Passeio privativo de um dia em Niterói, RJ, com orla, observação de aves, trilha no Costão de Itacoatiara e pôr do sol no Parque da Cidade.","touristType":"Aventura/Trekking","provider":{"@type":"LocalBusiness","name":"Tarja Verde Aventuras"}}
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="../../support.js"></script>
 </head>
 <body>
@@ -106,25 +108,25 @@
 
     <section style="{{ heroSectionStyle }}">
       <div style="position:absolute; inset:0; overflow:hidden;">
-        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/tapera-hero.mp4" poster="../../assets/media/tapera-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/home-hero.mp4" poster="../../assets/media/home-hero-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div style="position:absolute; inset:0; background:linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.4) 55%, oklch(0.279 0.047 56.2 / 0.65));"></div>
 
       <div style="position:relative; z-index:10; margin:0 auto; display:flex; flex:1; width:100%; max-width:110rem; flex-direction:column; justify-content:flex-end; padding:64px clamp(20px,6vw,40px) 56px;">
         <div ref="{{ heroRef }}" style="{{ heroReveal }}">
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.75); margin:0 0 20px;">
-            <a href="../../index.html#topo" style="color:inherit;">Tarja Verde</a> / <a href="../" style="color:inherit;">Roteiros</a> / Tapera + Zé Mundrongo
+            <a href="../../index.html#topo" style="color:inherit;">Tarja Verde</a> / <a href="../" style="color:inherit;">Roteiros</a> / Day Tour Niterói
           </p>
           <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
-            <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">Moderada</span>
+            <span style="border-radius:9999px; background:oklch(0.735 0.185 53.8); padding:8px 20px; font-size:0.65rem; font-weight:700; letter-spacing:0.16em; color:#fff; text-transform:uppercase;">Fácil</span>
             <span style="border-radius:9999px; border:1px solid rgba(255,255,255,0.4); padding:8px 20px; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.85);">Niterói, RJ</span>
           </div>
           <h1 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.88; letter-spacing:-0.035em; text-transform:uppercase; margin:24px 0 0; font-size:clamp(2.75rem, 8vw, 7.5rem); color:#fff;">
-            Tapera<br />+ Zé <span style="color:oklch(0.708 0.181 127.1);">Mundrongo</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
+            Day Tour<br /><span style="color:oklch(0.708 0.181 127.1);">Niterói</span><span style="color:oklch(0.735 0.185 53.8);">.</span>
           </h1>
           <div style="margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
             <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.708 0.181 127.1);">Consulte disponibilidade</span>
-            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: 5–6h</span>
+            <span style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:rgba(255,255,255,0.7);">Duração: dia inteiro</span>
           </div>
         </div>
       </div>
@@ -134,24 +136,72 @@
       <div style="margin:0 auto; display:grid; max-width:110rem; gap:48px; grid-template-columns:{{ contentGridCols }};">
         <div ref="{{ sobreRef }}" style="{{ sobreReveal }}">
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Sobre esse roteiro</p>
-          <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.95; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2rem,4vw,3rem);">Campos de altitude, ruínas e neblina rasteira</h2>
-          <p style="font-weight:200; letter-spacing:-0.01em; margin:24px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Uma trilha de nível moderado por Niterói, passando por campos abertos de altitude e trechos de mata fechada, com vista pra costa rochosa e o mar ao fundo nos pontos mais altos. No caminho, ruínas de uma antiga tapera marcam a paisagem, e a neblina costuma descer rasteira nas primeiras horas da manhã — parte do clima que faz esse roteiro ser um dos favoritos de quem já saiu com o Zeca.</p>
-          <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Itinerário detalhado, ponto de encontro e valor da saída são combinados diretamente com o Zeca — sem agenda fixa, a saída combina com o clima.</p>
+          <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.95; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2rem,4vw,3rem);">Do amanhecer na orla ao pôr do sol no Parque da Cidade</h2>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:24px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Feito sob medida pra quem tá hospedado no Rio e quer conhecer Niterói em um dia só. O Zeca busca você na porta do hotel bem cedo — 5h30 ou 6h — e segue pela orla até Niterói, com parada no MAC (Museu de Arte Contemporânea) pra fotos. De lá, o amanhecer pega o grupo na Praia de Icaraí, Boa Viagem ou Praia das Flechas.</p>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Depois do túnel, a parada é na Lagoa de Piratininga — de manhã cedo é quando mais aparecem aves pra observar. Seguindo pra Itacoatiara, começa a subida do Costão (quem preferir fica esperando na praia, com total segurança). Depois da descida, é hora de almoçar na areia, no camarote de Itaipu.</p>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">No fim da tarde, o grupo sobe pro Parque da Cidade pra ver o pôr do sol — aquele momento em que o céu fica vermelho antes de escurecer. De lá, é só voltar pro hotel.</p>
 
           <div style="margin-top:40px; display:flex; flex-wrap:wrap; gap:12px;">
-            <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+            <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20mais%20sobre%20o%20Day%20Tour%20Niter%C3%B3i%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
             <a href="../" style="border-radius:9999px; border:2px solid oklch(0.354 0.067 58.6 / 0.3); padding:16px 32px; color:oklch(0.354 0.067 58.6); font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:all 0.2s;" style-hover="background:oklch(0.354 0.067 58.6); color:#fff;">Ver outros roteiros</a>
           </div>
         </div>
 
         <div ref="{{ fotoRef }}" style="{{ fotoReveal }}">
-          <div style="position:relative; display:flex; align-items:center; justify-content:center; padding:16px;">
-            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(-4deg); width:min(80%, 24rem);">
+          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; padding:16px;">
+            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(-4deg); position:relative; z-index:2; width:min(65%, 19rem); margin:0 -12px 16px;">
               <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
-                <img src="../../assets/roteiro-tapera.jpg" alt="Trilha Tapera + Zé Mundrongo, Niterói, RJ" style="display:block; width:100%; height:100%; object-fit:cover;" />
+                <img src="../../assets/media/home-hero-poster.jpg" alt="Costão de Itacoatiara, Niterói, RJ" style="display:block; width:100%; height:100%; object-fit:cover;" />
+              </div>
+            </div>
+            <!-- cartão de vídeo real (Bullet Costão) — parte literal desse roteiro -->
+            <div style="background:#fff; padding:10px 10px 32px; border-radius:6px; box-shadow:0 16px 32px rgba(0,0,0,0.25); transform:rotate(5deg); position:relative; z-index:1; width:min(60%, 17rem); margin:20px -12px 0;">
+              <div style="aspect-ratio:1; overflow:hidden; border-radius:2px;">
+                <video src="../../assets/media/home-hero.mp4" poster="../../assets/media/home-hero-poster.jpg" style="display:block; width:100%; height:100%; object-fit:cover;" autoplay muted loop playsinline preload="metadata" aria-label="Subida do Costão de Itacoatiara"></video>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- preço real da planilha-mestre do Zeca (item 1, subgrupo Niterói): carioca
+         R$250, Brasil R$325 (+30%), internacional R$450 (+80%) — regra que a
+         própria planilha define. Mínimo/máximo de PAX ainda "A definir", por
+         isso não aparece aqui. -->
+    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
+      <div style="margin:0 auto; max-width:110rem; border-radius:1.5rem; background:oklch(0.895 0.011 112.4); padding:clamp(28px,4vw,48px); display:flex; flex-wrap:wrap; gap:32px; align-items:center; justify-content:space-between;">
+        <div style="display:flex; flex-wrap:wrap; gap:clamp(24px,5vw,56px);">
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Carioca</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ 250</p>
+          </div>
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Brasil</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ 325</p>
+          </div>
+          <div>
+            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Internacional</p>
+            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ 450</p>
+          </div>
+        </div>
+        <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20mais%20sobre%20o%20Day%20Tour%20Niter%C3%B3i%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s; white-space:nowrap;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
+      </div>
+    </section>
+
+    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
+      <div style="margin:0 auto; max-width:110rem;">
+        <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0 0 24px;">O roteiro do dia</p>
+        <div id="mapa-day-tour" style="height:28rem; width:100%; border-radius:1.5rem; overflow:hidden; background:oklch(0.895 0.011 112.4); margin-bottom:32px;" aria-label="Mapa com o trajeto do Day Tour Niterói"></div>
+        <div style="display:flex; flex-direction:column; gap:16px; max-width:48rem;">
+          <sc-for list="{{ paradas }}" as="p" hint-placeholder-count="6">
+            <div ref="{{ p.revealRef }}" style="{{ p.revealStyle }}">
+              <div style="border-radius:9999px 2.5rem 2.5rem 9999px; overflow:hidden; display:flex; align-items:center; gap:20px; background:oklch(0.895 0.011 112.4); padding:24px 32px;">
+                <span style="display:flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:9999px; background:#fff; border:2px solid oklch(0.708 0.181 127.1); font-family:'Manrope',sans-serif; font-weight:800; font-size:1rem; color:oklch(0.708 0.181 127.1);">{{ p.numero }}</span>
+                <p style="font-weight:200; letter-spacing:-0.01em; margin:0; font-size:1rem; color:oklch(0.354 0.067 58.6);"><strong style="font-weight:700; color:oklch(0.354 0.067 58.6);">{{ p.nome }}</strong> — {{ p.texto }}</p>
+              </div>
+            </div>
+          </sc-for>
         </div>
       </div>
     </section>
@@ -179,15 +229,15 @@
 
     <section style="position:relative; display:flex; min-height:60svh; align-items:center; overflow:hidden;">
       <div style="position:absolute; inset:0; overflow:hidden;">
-        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/tapera-hero.mp4" poster="../../assets/media/tapera-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+        <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="../../assets/media/home-hero.mp4" poster="../../assets/media/home-hero-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div style="position:absolute; inset:0; background:oklch(0.279 0.047 56.2 / 0.88);"></div>
       <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:96px clamp(20px,6vw,40px); text-align:center;">
         <img src="../../assets/logo-capsula.png" alt="" aria-hidden="true" style="margin:0 auto; width:72px; height:auto;" />
-        <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:28px 0 0; font-size:clamp(2.75rem,6vw,5.5rem); color:#fff;">Bora pra Tapera?</h2>
+        <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:28px 0 0; font-size:clamp(2.75rem,6vw,5.5rem); color:#fff;">Bora conhecer Niterói?</h2>
         <p style="font-weight:200; letter-spacing:-0.01em; margin:20px auto 0; max-width:30rem; font-size:1.1rem; color:rgba(255,255,255,0.85);">Consulte a disponibilidade e fala com o Zeca no WhatsApp pra garantir sua vaga.</p>
         <div style="margin-top:36px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;">
-          <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20a%20disponibilidade%20do%20roteiro%20Tapera%20%2B%20Z%C3%A9%20Mundrongo%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
+          <a href="https://wa.me/5521984885282?text=Oi%20Zeca!%20Quero%20saber%20mais%20sobre%20o%20Day%20Tour%20Niter%C3%B3i%20%F0%9F%8C%BF" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s;" style-hover="background:oklch(0.631 0.161 127.3);">Falar com o Zeca</a>
         </div>
       </div>
     </section>
@@ -255,6 +305,8 @@ class Component extends DCLogic {
         v.playsInline = true;
         if (v.paused) v.play().catch(() => {});
       });
+      const heroVideo = document.querySelector('section video');
+      if (heroVideo && heroVideo.playbackRate !== 0.75) heroVideo.playbackRate = 0.75;
     };
     document.addEventListener('visibilitychange', this._keepVideosPlaying);
     this._keepVideosPlaying();
@@ -294,6 +346,15 @@ class Component extends DCLogic {
     const barColor = scrolled || menuOpen ? 'oklch(0.354 0.067 58.6)' : '#fff';
     const barStyleBase = { display: 'block', width: '24px', height: '2px', background: menuOpen ? '#fff' : barColor, transition: 'transform 0.2s, opacity 0.2s' };
 
+    const paradas = [
+      { nome: 'MAC Niterói', texto: 'busca na porta do hotel (5h30/6h) e parada pra fotos, vindo pela orla.' },
+      { nome: 'Praia de Icaraí', texto: 'o amanhecer pega o grupo na praia (Icaraí, Boa Viagem ou Praia das Flechas).' },
+      { nome: 'Lagoa de Piratininga', texto: 'depois do túnel, parada pra observação de aves — horário bom de manhã.' },
+      { nome: 'Costão de Itacoatiara', texto: 'chegada às 8h e subida (quem preferir fica esperando na praia, com segurança).' },
+      { nome: 'Praia de Itaipu', texto: 'descida do Costão e almoço na areia, no camarote.' },
+      { nome: 'Parque da Cidade', texto: 'às 16h, subida pra ver o pôr do sol e retorno ao hotel depois de escurecer.' },
+    ].map((p, i) => ({ ...p, numero: i + 1, revealStyle: this.revealStyle('parada-' + i, i * 70), revealRef: this.revealRef('parada-' + i) }));
+
     const seguranca = [
       { n: '01', titulo: 'Guia certificado', texto: 'Guia CADASTUR (nacional e regional RJ), atendimento em português, inglês e espanhol.' },
       { n: '02', titulo: 'Experiência em campo', texto: 'Mais de 15 anos nas trilhas do estado do Rio de Janeiro, com dezenas de saídas conduzidas pelo Zeca Blak.' },
@@ -318,6 +379,7 @@ class Component extends DCLogic {
       sobreReveal: this.revealStyle('sobre'),
       fotoRef: this.revealRef('foto'),
       fotoReveal: this.revealStyle('foto', 120),
+      paradas,
       seguranca,
       contentGridCols: isMobile ? '1fr' : 'minmax(0,1.2fr) minmax(0,0.8fr)',
       heroSectionStyle: isMobile
@@ -351,6 +413,60 @@ class Component extends DCLogic {
   }
 }
 
+</script>
+<script>
+  // Mapa do trajeto — coordenadas reais (OpenStreetMap/Nominatim, 02/09/2026),
+  // não são dado do Zeca. Ordem segue o itinerário descrito na reunião.
+  (function () {
+    function initMapaDayTour() {
+      var el = document.getElementById('mapa-day-tour');
+      if (!el || typeof L === 'undefined') return;
+
+      var paradas = [
+        { nome: 'MAC Niterói', quando: 'parada pra fotos', lat: -22.9079221, lng: -43.1258687 },
+        { nome: 'Praia de Icaraí', quando: 'amanhecer', lat: -22.9090238, lng: -43.1114367 },
+        { nome: 'Lagoa de Piratininga', quando: 'manhã — observação de aves', lat: -22.9462555, lng: -43.0748471 },
+        { nome: 'Costão de Itacoatiara', quando: '8h — subida', lat: -22.9777125, lng: -43.0281699 },
+        { nome: 'Praia de Itaipu', quando: 'almoço na areia', lat: -22.9707549, lng: -43.0458288 },
+        { nome: 'Parque da Cidade', quando: '16h — pôr do sol', lat: -22.9297071, lng: -43.0875835 },
+      ];
+
+      var map = L.map(el, { scrollWheelZoom: false });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+      }).addTo(map);
+
+      var latLngs = paradas.map(function (p) { return [p.lat, p.lng]; });
+
+      L.polyline(latLngs, { color: '#5a8f1f', weight: 3, dashArray: '2 10', lineCap: 'round' }).addTo(map);
+
+      paradas.forEach(function (p, i) {
+        var icon = L.divIcon({
+          className: '',
+          html: '<div style="display:flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:9999px; background:#fff; border:2px solid #5a8f1f; color:#5a8f1f; font-family:Manrope,sans-serif; font-weight:800; font-size:12px; box-shadow:0 2px 8px rgba(0,0,0,0.25);">' + (i + 1) + '</div>',
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
+        });
+        L.marker([p.lat, p.lng], { icon: icon }).addTo(map).bindPopup('<strong>' + (i + 1) + '. ' + p.nome + '</strong><br>' + p.quando);
+      });
+
+      // legenda fica nas pílulas numeradas do "O roteiro do dia", logo abaixo do mapa —
+      // números aqui e lá seguem a mesma ordem, não precisa de legenda separada.
+
+      var bounds = L.latLngBounds(latLngs);
+      map.invalidateSize();
+      map.fitBounds(bounds, { padding: [32, 32] });
+      // o container só chega ao tamanho final depois do primeiro layout — recalcula
+      setTimeout(function () { map.invalidateSize(); map.fitBounds(bounds, { padding: [32, 32] }); }, 400);
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(initMapaDayTour, 300);
+    } else {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(initMapaDayTour, 300); });
+    }
+  })();
 </script>
 </body>
 </html>
