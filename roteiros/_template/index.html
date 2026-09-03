@@ -17,9 +17,9 @@
     (álbum fica JUNTO da descrição, não em seção separada — assim que o
     Zeca pediu). Com só 1 foto (caso de todos os roteiros hoje), deixar
     só o cartão do {{FOTO_PRINCIPAL}} e apagar os blocos de foto extra.
-  Bloco "INVESTIMENTO" → só se {{PRECO_CARIOCA}} existir na planilha
-    (Preço Brasil = carioca * 1,3 ; Preço internacional = carioca * 1,8 —
-    regra da própria planilha do Zeca, não recalcular diferente)
+  REGRA FIXA (Flávio, 03/09/2026): nunca mostrar preço/tabela de valores na
+  página, mesmo com "Preço carioca" definido na planilha — preço é sempre
+  negociado direto no WhatsApp. Não existe bloco de investimento no template.
 
   Ideia solta da reunião, NÃO implementada aqui (fora de escopo por ora):
   animação tipo "zoom do planeta até o mapa" (estilo Google Earth) pro
@@ -214,34 +214,11 @@
       </div>
     </section>
 
-    <!-- INVESTIMENTO — OPCIONAL: só incluir esta seção inteira se {{PRECO_CARIOCA}}
-         existir na planilha do Zeca. Preço Brasil = carioca × 1,3 e Preço
-         internacional = carioca × 1,8 (regra que a planilha já define — não
-         recalcular diferente). PAX e traslado também só aparecem se definidos. -->
-    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
-      <div style="margin:0 auto; max-width:110rem; border-radius:1.5rem; background:oklch(0.895 0.011 112.4); padding:clamp(28px,4vw,48px); display:flex; flex-wrap:wrap; gap:32px; align-items:center; justify-content:space-between;">
-        <div style="display:flex; flex-wrap:wrap; gap:clamp(24px,5vw,56px);">
-          <div>
-            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Carioca</p>
-            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_CARIOCA}}</p>
-          </div>
-          <div>
-            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Brasil</p>
-            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_BRASIL}}</p>
-          </div>
-          <div>
-            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Internacional</p>
-            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">R$ {{PRECO_INTERNACIONAL}}</p>
-          </div>
-          <!-- remover este bloco de PAX se {{PAX_MIN}}/{{PAX_MAX}} não vierem definidos -->
-          <div>
-            <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.65rem; color:oklch(0.52 0.035 62); margin:0;">Grupo</p>
-            <p style="font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.02em; margin:4px 0 0; font-size:1.75rem;">{{PAX_MIN}}–{{PAX_MAX}} pessoas</p>
-          </div>
-        </div>
-        <a href="https://wa.me/5521984885282?text={{WA_MENSAGEM_ENCODED}}" target="_blank" rel="noreferrer" style="border-radius:9999px; background:oklch(0.708 0.181 127.1); padding:16px 32px; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; transition:background-color 0.2s; white-space:nowrap;" style-hover="background:oklch(0.631 0.161 127.3);">Consultar disponibilidade</a>
-      </div>
-    </section>
+    <!-- NUNCA colocar preço/tabela de valores na página, mesmo quando a planilha
+         do Zeca já tiver "Preço carioca" definido (regra do Flávio, 03/09/2026:
+         "isso é só pra interno, de falar pelo WhatsApp"). Preço é sempre
+         negociado direto no WhatsApp — por isso não existe mais bloco de
+         Investimento aqui. Manter só o CTA de "Consultar disponibilidade". -->
 
     <!-- COM QUEM VOCÊ VAI — obrigatório, texto igual em todos os roteiros -->
     <section style="padding:96px clamp(20px,6vw,40px);">
