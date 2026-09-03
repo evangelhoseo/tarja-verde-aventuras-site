@@ -165,9 +165,10 @@
       </div>
     </section>
 
-    <section style="padding:0 clamp(20px,6vw,40px) 96px;">
+    <section style="padding:96px clamp(20px,6vw,40px);">
       <div style="margin:0 auto; max-width:110rem;">
-        <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0 0 24px;">O roteiro do dia</p>
+        <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">O roteiro do dia</p>
+        <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:1; letter-spacing:-0.035em; text-transform:uppercase; margin:12px 0 32px; font-size:clamp(2rem,4vw,3rem);">Do amanhecer ao pôr do sol, parada por parada</h2>
         <div id="mapa-day-tour" style="height:28rem; width:100%; border-radius:1.5rem; overflow:hidden; background:oklch(0.895 0.011 112.4); margin-bottom:32px;" aria-label="Mapa com o trajeto do Day Tour Niterói"></div>
         <div style="display:flex; flex-direction:column; gap:16px;">
           <sc-for list="{{ paradas }}" as="p" hint-placeholder-count="6">
