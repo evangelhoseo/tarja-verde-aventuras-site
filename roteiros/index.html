@@ -132,6 +132,9 @@
                     <img src="{{ r.foto }}" alt="" aria-hidden="true" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" />
                   </sc-if>
                   <div style="{{ r.overlayStyle }}"></div>
+                  <sc-if value="{{ r.videoContido }}">
+                    <video style="{{ r.videoContidoStyle }}" src="{{ r.videoContido }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+                  </sc-if>
                 </div>
                 <div style="{{ r.textWrapStyle }}">
                   <div ref="{{ r.revealRef }}" style="{{ r.revealStyle }}">
@@ -338,7 +341,7 @@ class Component extends DCLogic {
           // Islândia com vídeo da Aurora, Noruega com foto de banco; botão cai no
           // WhatsApp do Zeca até vir o contato da agência
           { nome: 'Islândia', slug: 'islandia', video: '../assets/media/islandia-hero.mp4', poster: '../assets/media/islandia-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
-          { nome: 'Noruega', slug: 'noruega', video: '../assets/media/noruega-hero.mp4', poster: '../assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
+          { nome: 'Noruega', slug: 'noruega', video: '../assets/media/noruega-hero.mp4', poster: '../assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', contido: true, nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
           { nome: 'Aurora Boreal', slug: 'aurora-boreal', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', nota: 'A aventura mais longa da agenda: céu em movimento.', detalhe: null },
         ],
         emBreve: [],
@@ -365,7 +368,14 @@ class Component extends DCLogic {
           textWrapStyle: isMobile
             ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
             : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
-          videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: r.posicao || 'center' },
+          // contido: no desktop o vídeo vertical aparece inteiro à direita, com o
+          // mesmo vídeo desfocado de fundo (a faixa cortada escondia a aurora).
+          // posicao (object-position) vale só no celular.
+          videoStyle: !isMobile && r.contido
+            ? { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', filter: 'blur(28px) brightness(0.75)', transform: 'scale(1.15)' }
+            : { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: isMobile ? (r.posicao || 'center') : 'center' },
+          videoContido: !isMobile && r.contido ? r.video : '',
+          videoContidoStyle: { position: 'absolute', zIndex: 5, top: '32px', bottom: '32px', right: 'clamp(20px,6vw,40px)', height: 'calc(100% - 64px)', aspectRatio: '9 / 16', objectFit: 'cover', borderRadius: '18px', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' },
           overlayStyle: isMobile
             ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
             : {
