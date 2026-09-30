@@ -123,17 +123,17 @@
         <section style="padding-bottom:16px;">
           <div style="display:flex; flex-direction:column;">
             <sc-for list="{{ reg.roteiros }}" as="r" hint-placeholder-count="2">
-              <article id="{{ r.slug }}" style="position:relative; display:flex; min-height:70svh; height:34rem; width:100%; align-items:flex-end; margin-top:24px; scroll-margin-top:80px;">
-                <div style="position:absolute; inset:0; overflow:hidden;">
+              <article id="{{ r.slug }}" style="{{ r.articleStyle }}">
+                <div style="{{ r.mediaStyle }}">
                   <sc-if value="{{ r.video }}">
                     <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
                   </sc-if>
                   <sc-if value="{{ r.foto }}">
                     <img src="{{ r.foto }}" alt="" aria-hidden="true" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" />
                   </sc-if>
+                  <div style="{{ r.overlayStyle }}"></div>
                 </div>
-                <div style="{{ r.overlayStyle }}"></div>
-                <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:0 clamp(20px,6vw,40px) 56px;">
+                <div style="{{ r.textWrapStyle }}">
                   <div ref="{{ r.revealRef }}" style="{{ r.revealStyle }}">
                     <div style="{{ r.contentStyle }} max-width:42rem;">
                       <div style="{{ r.rowJustify }} display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
@@ -244,6 +244,10 @@ class Component extends DCLogic {
         v.playsInline = true;
         if (v.paused) v.play().catch(() => {});
       });
+      // Day Tour Niterói: Bullet Costão em câmera lenta (0,75x), igual ao hero da Home
+      document.querySelectorAll('video[src$="home-hero.mp4"]').forEach((v) => {
+        if (v.playbackRate !== 0.75) v.playbackRate = 0.75;
+      });
     };
     document.addEventListener('visibilitychange', this._keepVideosPlaying);
     this._keepVideosPlaying();
@@ -345,13 +349,25 @@ class Component extends DCLogic {
     const regioes = regioesBase.map((reg) => {
       const roteiros = reg.roteiros.map((r) => {
         const idx = i++;
-        const reverse = idx % 2 === 1;
+        // no celular: vídeo inteiro em cima e texto embaixo (mesmo padrão da Home)
+        const reverse = !isMobile && idx % 2 === 1;
         return {
           ...r,
           waLink: this.waLink(r.nivel === 'Grupo privado'
             ? 'Oi Zeca! Quero saber do grupo privado pra ' + r.nome + ' \u{1F30C}'
             : 'Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
-          overlayStyle: {
+          articleStyle: isMobile
+            ? { position: 'relative', display: 'flex', flexDirection: 'column', width: '100%', marginTop: '24px', scrollMarginTop: '80px', background: 'oklch(0.279 0.047 56.2)' }
+            : { position: 'relative', display: 'flex', minHeight: '70svh', height: '34rem', width: '100%', alignItems: 'flex-end', marginTop: '24px', scrollMarginTop: '80px' },
+          mediaStyle: isMobile
+            ? { position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }
+            : { position: 'absolute', inset: 0, overflow: 'hidden' },
+          textWrapStyle: isMobile
+            ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
+            : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
+          overlayStyle: isMobile
+            ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
+            : {
             position: 'absolute', inset: 0,
             background: reverse
               ? 'linear-gradient(to top right, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.6) 55%, oklch(0.279 0.047 56.2 / 0.3))'

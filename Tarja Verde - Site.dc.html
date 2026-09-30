@@ -317,8 +317,11 @@ class Component extends DCLogic {
         v.playsInline = true;
         if (v.paused) v.play().catch(() => {});
       });
-      const heroVideo = document.querySelector('#topo video');
-      if (heroVideo && heroVideo.playbackRate !== 0.75) heroVideo.playbackRate = 0.75;
+      // câmera lenta (0,75x) no hero e no vídeo do Bullet Costão, que
+      // também é o do card do Day Tour Niterói
+      document.querySelectorAll('#topo video, video[src$="home-hero.mp4"]').forEach((v) => {
+        if (v.playbackRate !== 0.75) v.playbackRate = 0.75;
+      });
     };
     document.addEventListener('visibilitychange', this._keepVideosPlaying);
     this._keepVideosPlaying();
@@ -404,7 +407,7 @@ class Component extends DCLogic {
           ? { position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }
           : { position: 'absolute', inset: 0, overflow: 'hidden' },
         textWrapStyle: isMobile
-          ? { position: 'relative', zIndex: 10, width: '100%', padding: '4px clamp(20px,6vw,40px) 56px' }
+          ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
           : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
         overlayStyle: isMobile
           ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
