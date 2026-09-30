@@ -126,7 +126,7 @@
               <article id="{{ r.slug }}" style="{{ r.articleStyle }}">
                 <div style="{{ r.mediaStyle }}">
                   <sc-if value="{{ r.video }}">
-                    <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+                    <video style="{{ r.videoStyle }}" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
                   </sc-if>
                   <sc-if value="{{ r.foto }}">
                     <img src="{{ r.foto }}" alt="" aria-hidden="true" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" />
@@ -337,8 +337,8 @@ class Component extends DCLogic {
           // grupos privados com chancela Marco Broto (reunião 30/09). PROVISÓRIO:
           // Islândia com vídeo da Aurora, Noruega com foto de banco; botão cai no
           // WhatsApp do Zeca até vir o contato da agência
-          { nome: 'Islândia', slug: 'islandia', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
-          { nome: 'Noruega', slug: 'noruega', foto: '../assets/media/noruega-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
+          { nome: 'Islândia', slug: 'islandia', video: '../assets/media/islandia-hero.mp4', poster: '../assets/media/islandia-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
+          { nome: 'Noruega', slug: 'noruega', video: '../assets/media/noruega-hero.mp4', poster: '../assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
           { nome: 'Aurora Boreal', slug: 'aurora-boreal', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', nota: 'A aventura mais longa da agenda: céu em movimento.', detalhe: null },
         ],
         emBreve: [],
@@ -365,6 +365,7 @@ class Component extends DCLogic {
           textWrapStyle: isMobile
             ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
             : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
+          videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: r.posicao || 'center' },
           overlayStyle: isMobile
             ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
             : {
