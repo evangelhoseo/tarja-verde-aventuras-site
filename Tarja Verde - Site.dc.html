@@ -376,14 +376,14 @@ class Component extends DCLogic {
     const barColor = scrolled || menuOpen ? 'oklch(0.354 0.067 58.6)' : '#fff';
     const barStyleBase = { display: 'block', width: '24px', height: '2px', background: menuOpen ? '#fff' : barColor, transition: 'transform 0.2s, opacity 0.2s' };
 
-    // grade da 1ª versão (reunião 30/09). PROVISÓRIO: Ibitipoca usa o vídeo do
-    // Circuito 3D, Islândia o da Aurora e Noruega uma foto de banco — trocar
+    // grade da 1ª versão (reunião 30/09). PROVISÓRIO: Islândia usa o vídeo da
+    // Aurora e Noruega uma foto de banco — trocar
     // pelas mídias do Zeca; Islândia/Noruega vão pro contato da agência Marco
     // Broto quando ele mandar (por enquanto o botão cai no WhatsApp do Zeca)
     const roteirosBase = [
       { nome: 'Day Tour Niterói', video: 'assets/media/home-hero.mp4', poster: 'assets/media/home-hero-poster.jpg', nivel: 'Fácil', local: 'Niterói, RJ', duracao: 'Dia inteiro', nota: 'Do amanhecer na orla ao pôr do sol no Parque da Cidade, com almoço "pé na areia".', detalhe: 'roteiros/day-tour-niteroi/' },
       { nome: 'Serra dos Órgãos', video: 'assets/media/castelos-hero.mp4', poster: 'assets/media/castelos-poster.jpg', nivel: 'Vários níveis', local: 'Petrópolis e Teresópolis, RJ', duracao: 'Hikes variados', nota: 'Castelos do Açu, Pedra do Sino, Portais de Hércules e outros hikes na serra.', detalhe: 'roteiros/#regiao-serrana' },
-      { nome: 'Ibitipoca', video: 'assets/media/circuito3d-hero.mp4', poster: 'assets/media/circuito3d-poster.jpg', nivel: 'Fim de semana', local: 'Lima Duarte, MG', duracao: '3 dias / 2 pernoites', nota: 'Circuito das Águas, Janela do Céu e pousada de padrão excelente.' },
+      { nome: 'Ibitipoca', video: 'assets/media/ibitipoca-hero.mp4', poster: 'assets/media/ibitipoca-poster.jpg', nivel: 'Fim de semana', local: 'Lima Duarte, MG', duracao: '3 dias / 2 pernoites', nota: 'Circuito das Águas, Janela do Céu e pousada de padrão excelente.' },
       { nome: 'Islândia', video: 'assets/media/aurora-hero.mp4', poster: 'assets/media/aurora-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
       { nome: 'Noruega', foto: 'assets/media/noruega-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
     ];
