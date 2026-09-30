@@ -388,9 +388,9 @@ class Component extends DCLogic {
     // celular; contido = vídeo inteiro à direita no desktop (Noruega)
     const roteirosBase = [
       { nome: 'Day Tour Niterói', video: 'assets/media/home-hero.mp4', poster: 'assets/media/home-hero-poster.jpg', nivel: 'Fácil', local: 'Niterói, RJ', duracao: 'Dia inteiro', nota: 'Do amanhecer na orla ao pôr do sol no Parque da Cidade, com almoço "pé na areia".', detalhe: 'roteiros/day-tour-niteroi/' },
-      { nome: 'Serra dos Órgãos', video: 'assets/media/serra-orgaos-hero.mp4', poster: 'assets/media/serra-orgaos-poster.jpg', contido: true, proporcao: '540 / 690', nivel: 'Vários níveis', local: 'Petrópolis e Teresópolis, RJ', duracao: 'Hikes variados', nota: 'Castelos do Açu, Pedra do Sino, Portais de Hércules e outros hikes na serra.', detalhe: 'roteiros/#regiao-serrana' },
+      { nome: 'Serra dos Órgãos', video: 'assets/media/serra-orgaos-hero.mp4', poster: 'assets/media/serra-orgaos-poster.jpg', nivel: 'Vários níveis', local: 'Petrópolis e Teresópolis, RJ', duracao: 'Hikes variados', nota: 'Castelos do Açu, Pedra do Sino, Portais de Hércules e outros hikes na serra.', detalhe: 'roteiros/#regiao-serrana' },
       { nome: 'Ibitipoca', video: 'assets/media/ibitipoca-hero.mp4', poster: 'assets/media/ibitipoca-poster.jpg', nivel: 'Fim de semana', local: 'Lima Duarte, MG', duracao: '3 dias / 2 pernoites', nota: 'Circuito das Águas, Janela do Céu e pousada de padrão excelente.' },
-      { nome: 'Islândia', video: 'assets/media/islandia-hero.mp4', poster: 'assets/media/islandia-poster.jpg', contido: true, nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
+      { nome: 'Islândia', video: 'assets/media/islandia-hero.mp4', poster: 'assets/media/islandia-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
       { nome: 'Noruega', video: 'assets/media/noruega-hero.mp4', poster: 'assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', contido: true, nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
     ];
 
@@ -419,7 +419,7 @@ class Component extends DCLogic {
           ? { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', filter: 'blur(28px) brightness(0.75)', transform: 'scale(1.15)' }
           : { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: isMobile ? (r.posicao || 'center') : 'center' },
         videoContido: !isMobile && r.contido ? r.video : '',
-        videoContidoStyle: { position: 'absolute', zIndex: 5, top: '32px', bottom: '32px', [reverse ? 'left' : 'right']: 'clamp(20px,6vw,40px)', height: 'calc(100% - 64px)', aspectRatio: r.proporcao || '9 / 16', objectFit: 'cover', borderRadius: '18px', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' },
+        videoContidoStyle: { position: 'absolute', zIndex: 5, top: '32px', bottom: '32px', right: 'clamp(20px,6vw,40px)', height: 'calc(100% - 64px)', aspectRatio: '9 / 16', objectFit: 'cover', borderRadius: '18px', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' },
         overlayStyle: isMobile
           ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
           : {
