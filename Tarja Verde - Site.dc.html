@@ -163,17 +163,17 @@
 
       <div style="margin-top:48px; display:flex; flex-direction:column;">
         <sc-for list="{{ roteiros }}" as="r" hint-placeholder-count="4">
-          <article style="position:relative; display:flex; min-height:70svh; height:34rem; width:100%; align-items:flex-end;">
-            <div style="position:absolute; inset:0; overflow:hidden;">
+          <article style="{{ r.articleStyle }}">
+            <div style="{{ r.mediaStyle }}">
               <sc-if value="{{ r.video }}">
                 <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
               </sc-if>
               <sc-if value="{{ r.foto }}">
                 <img src="{{ r.foto }}" alt="" aria-hidden="true" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" />
               </sc-if>
+              <div style="{{ r.overlayStyle }}"></div>
             </div>
-            <div style="{{ r.overlayStyle }}"></div>
-            <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:0 clamp(20px,6vw,40px) 56px;">
+            <div style="{{ r.textWrapStyle }}">
               <div ref="{{ r.revealRef }}" style="{{ r.revealStyle }}">
                 <div style="{{ r.contentStyle }} max-width:42rem;">
                   <div style="{{ r.rowJustify }} display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
@@ -388,14 +388,27 @@ class Component extends DCLogic {
       { nome: 'Noruega', foto: 'assets/media/noruega-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
     ];
 
+    // no celular o vídeo fica inteiro em cima e o texto embaixo, sobre o
+    // marrom, pra não esconder quem aparece no vídeo (ex.: Zeca na Serra)
     const roteiros = roteirosBase.map((r, i) => {
-      const reverse = i % 2 === 1;
+      const reverse = !isMobile && i % 2 === 1;
       return {
         ...r,
         waLink: this.waLink(r.nivel === 'Grupo privado'
           ? 'Oi Zeca! Quero saber do grupo privado pra ' + r.nome + ' \u{1F30C}'
           : 'Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
-        overlayStyle: {
+        articleStyle: isMobile
+          ? { position: 'relative', display: 'flex', flexDirection: 'column', width: '100%', background: 'oklch(0.279 0.047 56.2)' }
+          : { position: 'relative', display: 'flex', minHeight: '70svh', height: '34rem', width: '100%', alignItems: 'flex-end' },
+        mediaStyle: isMobile
+          ? { position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }
+          : { position: 'absolute', inset: 0, overflow: 'hidden' },
+        textWrapStyle: isMobile
+          ? { position: 'relative', zIndex: 10, width: '100%', padding: '4px clamp(20px,6vw,40px) 56px' }
+          : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
+        overlayStyle: isMobile
+          ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
+          : {
           position: 'absolute', inset: 0,
           background: reverse
             ? 'linear-gradient(to top right, oklch(0.279 0.047 56.2 / 0.95), oklch(0.279 0.047 56.2 / 0.6) 55%, oklch(0.279 0.047 56.2 / 0.3))'
