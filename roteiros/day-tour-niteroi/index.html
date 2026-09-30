@@ -141,7 +141,7 @@
           <p style="font-weight:700; text-transform:uppercase; letter-spacing:0.22em; font-size:0.7rem; color:oklch(0.735 0.185 53.8); margin:0;">Sobre esse roteiro</p>
           <h2 style="font-family:'Manrope',sans-serif; font-weight:800; line-height:0.95; letter-spacing:-0.035em; text-transform:uppercase; margin:16px 0 0; font-size:clamp(2rem,4vw,3rem);">Do amanhecer na orla ao pôr do sol no Parque da Cidade</h2>
           <p style="font-weight:200; letter-spacing:-0.01em; margin:24px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Feito sob medida pra quem tá hospedado no Rio e quer conhecer Niterói em um dia só. O Zeca busca você na porta do hotel bem cedo — 5h30 ou 6h — e segue pela orla até Niterói, com parada no MAC (Museu de Arte Contemporânea) pra fotos. De lá, o amanhecer pega o grupo na Praia de Icaraí, Boa Viagem ou Praia das Flechas.</p>
-          <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Depois do túnel, a parada é na Lagoa de Piratininga — de manhã cedo é quando mais aparecem aves pra observar. Seguindo pra Itacoatiara, começa a subida do Costão (quem preferir fica esperando na praia, com total segurança). Depois da descida, é hora de almoçar na areia, no camarote de Itaipu.</p>
+          <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">Depois do túnel, a parada é na Lagoa de Piratininga — de manhã cedo é quando mais aparecem aves pra observar. Seguindo pra Itacoatiara, começa a subida do Costão (quem preferir fica esperando na praia, com total segurança). Depois da descida, é hora de almoçar num restaurante pé na areia.</p>
           <p style="font-weight:200; letter-spacing:-0.01em; margin:16px 0 0; font-size:1.15rem; color:oklch(0.354 0.067 58.6 / 0.85);">No fim da tarde, o grupo sobe pro Parque da Cidade pra ver o pôr do sol — aquele momento em que o céu fica vermelho antes de escurecer. De lá, é só voltar pro hotel.</p>
 
           <div style="margin-top:40px; display:flex; flex-wrap:wrap; gap:12px;">
@@ -216,9 +216,11 @@
                     <p style="font-weight:200; letter-spacing:-0.01em; margin:0; font-size:1rem; color:oklch(0.354 0.067 58.6);"><strong style="font-weight:700; color:oklch(0.354 0.067 58.6);">{{ p.nome }}</strong> — {{ p.texto }}</p>
                   </div>
                 </div>
-                <div style="flex:1 1 280px;">
-                  <div style="position:relative; aspect-ratio:16/10; border-radius:1.25rem; overflow:hidden;">
-                    <img src="{{ p.foto }}" alt="{{ p.nome }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+                <div style="{{ p.fotoColStyle }}">
+                  <div style="{{ p.fotoFrameStyle }}">
+                    <div style="{{ p.fotoBoxStyle }}">
+                      <img src="{{ p.foto }}" alt="{{ p.nome }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -437,21 +439,32 @@ class Component extends DCLogic {
       { nome: 'Praia de Icaraí', texto: 'o amanhecer pega o grupo na praia (Icaraí, Boa Viagem ou Praia das Flechas).', foto: '../../assets/_prototype/icarai.jpg' },
       { nome: 'Lagoa de Piratininga', texto: 'depois do túnel, parada pra observação de aves — horário bom de manhã.', foto: '../../assets/_prototype/piratininga.jpg' },
       { nome: 'Costão de Itacoatiara', texto: 'chegada às 8h e subida (quem preferir fica esperando na praia, com segurança).', foto: '../../assets/media/home-hero-poster.jpg' },
-      { nome: 'Praia de Itaipu', texto: 'descida do Costão e almoço na areia, no camarote.', foto: '../../assets/_prototype/itaipu.jpg' },
+      { nome: 'Praia de Itaipu', texto: 'descida do Costão e almoço num restaurante pé na areia.', foto: '../../assets/_prototype/itaipu.jpg' },
       { nome: 'Parque da Cidade', texto: 'às 16h, subida pra ver o pôr do sol e retorno ao hotel depois de escurecer.', foto: '../../assets/_prototype/parque-da-cidade.jpg' },
     ].map((p, i) => ({
       ...p,
       numero: i + 1,
       rowStyle: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '24px', flexDirection: i % 2 === 0 ? 'row' : 'row-reverse' },
+      // no desktop a foto vira polaroid menor e levemente torta (pedido da reunião
+      // de 30/09); no celular continua ocupando a largura toda
+      fotoColStyle: isMobile
+        ? { flex: '1 1 280px' }
+        : { flex: '0 1 22rem', display: 'flex', justifyContent: 'center', margin: '0 auto' },
+      fotoFrameStyle: isMobile
+        ? {}
+        : { width: '100%', background: '#fff', padding: '12px 12px 44px', borderRadius: '4px', boxShadow: '0 18px 40px -18px rgba(40,28,15,0.45)', transform: 'rotate(' + (i % 2 === 0 ? 2 : -2) + 'deg)', boxSizing: 'border-box' },
+      fotoBoxStyle: isMobile
+        ? { position: 'relative', aspectRatio: '16/10', borderRadius: '1.25rem', overflow: 'hidden' }
+        : { position: 'relative', aspectRatio: '1', overflow: 'hidden' },
       revealStyle: this.revealStyle('parada-' + i, i * 70),
       revealRef: this.revealRef('parada-' + i),
     }));
 
     const seguranca = [
       { n: '01', titulo: 'Guia certificado', texto: 'Guia CADASTUR (nacional e regional RJ), atendimento em português, inglês e espanhol.' },
-      { n: '02', titulo: 'Experiência em campo', texto: 'Mais de 15 anos nas trilhas do estado do Rio de Janeiro, com dezenas de saídas conduzidas pelo Zeca Blak.' },
+      { n: '02', titulo: 'Experiências em campo', texto: 'Das montanhas do Rio de Janeiro ao Círculo Polar Ártico: mais de 15 anos de trilhas e expedições pelo extremo norte da Europa.' },
       { n: '03', titulo: 'Equipamento de apoio', texto: 'Kit de primeiros socorros, rádio comunicador, rastreador satelital (Spot) e corda de apoio nos trechos mais técnicos.' },
-      { n: '04', titulo: 'Atenção com iniciantes', texto: 'Ritmo e explicações ajustados pra quem está saindo pela primeira vez.' },
+      { n: '04', titulo: 'Atenção com iniciantes', texto: 'Ritmo e explicações ajustados pra quem está começando no mundo das aventuras.' },
       { n: '05', titulo: 'Trato com o grupo', texto: 'Muita experiência em lidar com pessoas e imprevistos — atencioso e cuidadoso em cada saída.' },
     ].map((s, i) => ({ ...s, revealStyle: this.revealStyle('seg-' + i, i * 90), revealRef: this.revealRef('seg-' + i) }));
 
