@@ -165,7 +165,12 @@
         <sc-for list="{{ roteiros }}" as="r" hint-placeholder-count="4">
           <article style="position:relative; display:flex; min-height:70svh; height:34rem; width:100%; align-items:flex-end;">
             <div style="position:absolute; inset:0; overflow:hidden;">
-              <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+              <sc-if value="{{ r.video }}">
+                <video style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" src="{{ r.video }}" poster="{{ r.poster }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+              </sc-if>
+              <sc-if value="{{ r.foto }}">
+                <img src="{{ r.foto }}" alt="" aria-hidden="true" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover;" />
+              </sc-if>
             </div>
             <div style="{{ r.overlayStyle }}"></div>
             <div style="position:relative; z-index:10; margin:0 auto; width:100%; max-width:110rem; padding:0 clamp(20px,6vw,40px) 56px;">
@@ -265,7 +270,7 @@ class Component extends DCLogic {
   STATS = [
     { target: 15, suffix: '+', label: 'anos de trilha no Rio de Janeiro' },
     { target: 60, suffix: '+', label: 'saídas conduzidas' },
-    { target: 4, suffix: '', label: 'roteiros no cardápio' },
+    { target: 5, suffix: '', label: 'roteiros no cardápio' },
   ];
   state = { scrolled: false, visible: {}, isMobile: false, menuOpen: false, counts: {} };
   _targets = new Map();
@@ -371,18 +376,25 @@ class Component extends DCLogic {
     const barColor = scrolled || menuOpen ? 'oklch(0.354 0.067 58.6)' : '#fff';
     const barStyleBase = { display: 'block', width: '24px', height: '2px', background: menuOpen ? '#fff' : barColor, transition: 'transform 0.2s, opacity 0.2s' };
 
+    // grade da 1ª versão (reunião 30/09). PROVISÓRIO: Ibitipoca usa o vídeo do
+    // Circuito 3D, Islândia o da Aurora e Noruega uma foto de banco — trocar
+    // pelas mídias do Zeca; Islândia/Noruega vão pro contato da agência Marco
+    // Broto quando ele mandar (por enquanto o botão cai no WhatsApp do Zeca)
     const roteirosBase = [
-      { nome: 'Castelos do Açu', video: 'assets/media/castelos-hero.mp4', poster: 'assets/media/castelos-poster.jpg', nivel: 'Moderada', local: 'Petrópolis, RJ', duracao: '6–7h', nota: 'Torres de granito acima do mar de nuvens.' },
-      { nome: 'Circuito 3D', video: 'assets/media/circuito3d-hero.mp4', poster: 'assets/media/circuito3d-poster.jpg', nivel: 'Fácil / moderada', local: 'Cachoeiras de Macacu, RJ', duracao: '4–5h', nota: "Três quedas d'água em mata atlântica fechada." },
-      { nome: 'Tapera + Zé Mundrongo', video: 'assets/media/tapera-hero.mp4', poster: 'assets/media/tapera-poster.jpg', nivel: 'Moderada', local: 'Niterói, RJ', duracao: '5–6h', nota: 'Campos de altitude, ruínas e neblina rasteira.', detalhe: 'roteiros/tapera-e-ze-mundrongo/' },
-      { nome: 'Aurora Boreal', video: 'assets/media/aurora-hero.mp4', poster: 'assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', nota: 'A aventura mais longa da temporada: céu em movimento.' },
+      { nome: 'Day Tour Niterói', video: 'assets/media/home-hero.mp4', poster: 'assets/media/home-hero-poster.jpg', nivel: 'Fácil', local: 'Niterói, RJ', duracao: 'Dia inteiro', nota: 'Do amanhecer na orla ao pôr do sol no Parque da Cidade, com almoço "pé na areia".', detalhe: 'roteiros/day-tour-niteroi/' },
+      { nome: 'Serra dos Órgãos', video: 'assets/media/castelos-hero.mp4', poster: 'assets/media/castelos-poster.jpg', nivel: 'Vários níveis', local: 'Petrópolis e Teresópolis, RJ', duracao: 'Hikes variados', nota: 'Castelos do Açu, Pedra do Sino, Portais de Hércules e outros hikes na serra.', detalhe: 'roteiros/#regiao-serrana' },
+      { nome: 'Ibitipoca', video: 'assets/media/circuito3d-hero.mp4', poster: 'assets/media/circuito3d-poster.jpg', nivel: 'Fim de semana', local: 'Lima Duarte, MG', duracao: '3 dias / 2 pernoites', nota: 'Circuito das Águas, Janela do Céu e pousada de padrão excelente.' },
+      { nome: 'Islândia', video: 'assets/media/aurora-hero.mp4', poster: 'assets/media/aurora-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
+      { nome: 'Noruega', foto: 'assets/media/noruega-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
     ];
 
     const roteiros = roteirosBase.map((r, i) => {
       const reverse = i % 2 === 1;
       return {
         ...r,
-        waLink: this.waLink('Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
+        waLink: this.waLink(r.nivel === 'Grupo privado'
+          ? 'Oi Zeca! Quero saber do grupo privado pra ' + r.nome + ' \u{1F30C}'
+          : 'Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
         overlayStyle: {
           position: 'absolute', inset: 0,
           background: reverse
