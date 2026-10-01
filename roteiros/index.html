@@ -338,7 +338,7 @@ class Component extends DCLogic {
           // Islândia com vídeo da Aurora, Noruega com foto de banco; botão cai no
           // WhatsApp do Zeca até vir o contato da agência
           { nome: 'Islândia', slug: 'islandia', video: '../assets/media/islandia-hero.mp4', poster: '../assets/media/islandia-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
-          { nome: 'Noruega', slug: 'noruega', video: '../assets/media/noruega-hero.mp4', poster: '../assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
+          { nome: 'Noruega', slug: 'noruega', video: '../assets/media/noruega-hero.mp4', poster: '../assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', realce: true, nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.', detalhe: null },
           { nome: 'Aurora Boreal', slug: 'aurora-boreal', video: '../assets/media/aurora-hero.mp4', poster: '../assets/media/aurora-poster.jpg', nivel: 'Fácil', local: 'Destino internacional', duracao: '7 dias', nota: 'A aventura mais longa da agenda: céu em movimento.', detalhe: null },
         ],
         emBreve: [],
@@ -358,15 +358,19 @@ class Component extends DCLogic {
             : 'Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
           articleStyle: isMobile
             ? { position: 'relative', display: 'flex', flexDirection: 'column', width: '100%', marginTop: '24px', scrollMarginTop: '80px', background: 'oklch(0.279 0.047 56.2)' }
-            : { position: 'relative', display: 'flex', minHeight: '70svh', height: '34rem', width: '100%', alignItems: 'flex-end', marginTop: '24px', scrollMarginTop: '80px' },
+            : { position: 'relative', display: 'flex', minHeight: '70svh', height: r.realce ? '46rem' : '34rem', width: '100%', alignItems: 'flex-end', marginTop: '24px', scrollMarginTop: '80px' },
           mediaStyle: isMobile
             ? { position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }
             : { position: 'absolute', inset: 0, overflow: 'hidden' },
           textWrapStyle: isMobile
             ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
             : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
-          videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: r.posicao || 'center' },
-          overlayStyle: isMobile
+          videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: isMobile ? (r.posicao || 'center') : 'center', filter: !isMobile && r.realce ? 'brightness(1.35) saturate(1.4) contrast(1.05)' : 'none' },
+          // realce (Noruega): no desktop o card é mais alto, o vídeo ganha brilho e o
+          // degradê escurece só atrás do texto (à esquerda), pra aurora aparecer
+          overlayStyle: !isMobile && r.realce
+            ? { position: 'absolute', inset: 0, background: 'linear-gradient(to right, oklch(0.279 0.047 56.2 / 0.9), oklch(0.279 0.047 56.2 / 0.55) 35%, oklch(0.279 0.047 56.2 / 0) 65%), linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.5), oklch(0.279 0.047 56.2 / 0) 30%)' }
+          : isMobile
             ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
             : {
             position: 'absolute', inset: 0,

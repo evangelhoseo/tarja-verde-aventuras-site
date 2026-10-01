@@ -381,14 +381,15 @@ class Component extends DCLogic {
 
     // grade da 1ª versão (reunião 30/09). PROVISÓRIO: Islândia/Noruega vão pro
     // contato da agência Marco Broto quando o Zeca mandar (por enquanto o botão
-    // cai no WhatsApp dele). posicao = object-position do vídeo (Noruega: as
-    // casinhas ficam no rodapé do quadro)
+    // cai no WhatsApp dele). posicao = object-position do vídeo só no
+    // celular (Noruega: casinhas no rodapé; no desktop fica no centro pra
+    // não cortar a aurora)
     const roteirosBase = [
       { nome: 'Day Tour Niterói', video: 'assets/media/home-hero.mp4', poster: 'assets/media/home-hero-poster.jpg', nivel: 'Fácil', local: 'Niterói, RJ', duracao: 'Dia inteiro', nota: 'Do amanhecer na orla ao pôr do sol no Parque da Cidade, com almoço "pé na areia".', detalhe: 'roteiros/day-tour-niteroi/' },
       { nome: 'Serra dos Órgãos', video: 'assets/media/serra-orgaos-hero.mp4', poster: 'assets/media/serra-orgaos-poster.jpg', nivel: 'Vários níveis', local: 'Petrópolis e Teresópolis, RJ', duracao: 'Hikes variados', nota: 'Castelos do Açu, Pedra do Sino, Portais de Hércules e outros hikes na serra.', detalhe: 'roteiros/#regiao-serrana' },
       { nome: 'Ibitipoca', video: 'assets/media/ibitipoca-hero.mp4', poster: 'assets/media/ibitipoca-poster.jpg', nivel: 'Fim de semana', local: 'Lima Duarte, MG', duracao: '3 dias / 2 pernoites', nota: 'Circuito das Águas, Janela do Céu e pousada de padrão excelente.' },
       { nome: 'Islândia', video: 'assets/media/islandia-hero.mp4', poster: 'assets/media/islandia-poster.jpg', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
-      { nome: 'Noruega', video: 'assets/media/noruega-hero.mp4', poster: 'assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
+      { nome: 'Noruega', video: 'assets/media/noruega-hero.mp4', poster: 'assets/media/noruega-hero-poster.jpg', posicao: 'center 85%', realce: true, nivel: 'Grupo privado', local: 'Chancela Marco Broto', duracao: 'Datas e valores sob consulta', nota: 'Grupo privado com o Zeca, com a chancela da agência Marco Broto.' },
     ];
 
     // no celular o vídeo fica inteiro em cima e o texto embaixo, sobre o
@@ -402,15 +403,19 @@ class Component extends DCLogic {
           : 'Oi Zeca! Quero saber a disponibilidade do roteiro ' + r.nome + ' \u{1F33F}'),
         articleStyle: isMobile
           ? { position: 'relative', display: 'flex', flexDirection: 'column', width: '100%', background: 'oklch(0.279 0.047 56.2)' }
-          : { position: 'relative', display: 'flex', minHeight: '70svh', height: '34rem', width: '100%', alignItems: 'flex-end' },
+          : { position: 'relative', display: 'flex', minHeight: '70svh', height: r.realce ? '46rem' : '34rem', width: '100%', alignItems: 'flex-end' },
         mediaStyle: isMobile
           ? { position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }
           : { position: 'absolute', inset: 0, overflow: 'hidden' },
         textWrapStyle: isMobile
           ? { position: 'relative', zIndex: 10, width: '100%', boxSizing: 'border-box', padding: '4px clamp(20px,6vw,40px) 56px' }
           : { position: 'relative', zIndex: 10, margin: '0 auto', width: '100%', maxWidth: '110rem', padding: '0 clamp(20px,6vw,40px) 56px' },
-        videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: r.posicao || 'center' },
-        overlayStyle: isMobile
+        videoStyle: { position: 'absolute', inset: 0, height: '100%', width: '100%', objectFit: 'cover', objectPosition: isMobile ? (r.posicao || 'center') : 'center', filter: !isMobile && r.realce ? 'brightness(1.35) saturate(1.4) contrast(1.05)' : 'none' },
+        // realce (Noruega): no desktop o card é mais alto, o vídeo ganha brilho e o
+        // degradê escurece só atrás do texto (à esquerda), pra aurora aparecer
+        overlayStyle: !isMobile && r.realce
+          ? { position: 'absolute', inset: 0, background: 'linear-gradient(to right, oklch(0.279 0.047 56.2 / 0.9), oklch(0.279 0.047 56.2 / 0.55) 35%, oklch(0.279 0.047 56.2 / 0) 65%), linear-gradient(to top, oklch(0.279 0.047 56.2 / 0.5), oklch(0.279 0.047 56.2 / 0) 30%)' }
+        : isMobile
           ? { position: 'absolute', inset: 0, background: 'linear-gradient(to top, oklch(0.279 0.047 56.2), oklch(0.279 0.047 56.2 / 0) 30%)' }
           : {
           position: 'absolute', inset: 0,
